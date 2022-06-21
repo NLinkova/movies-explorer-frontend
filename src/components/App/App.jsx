@@ -23,8 +23,6 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-    // стейты для входа
-  const [loggedIn, setLoggedIn] = useState(false);
 return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="">
@@ -41,24 +39,21 @@ return (
             <Register
             />
           </Route>
-          <ProtectedRoute
+          <Route
             exact
             path="/movies"
-            loggedIn={loggedIn}
-            component={Movies}
+            element={<Movies />}
           />
-          <ProtectedRoute
+          <Route
             exact
             path="/saved-movies"
-            component={Movies}
-            loggedIn={loggedIn}
+            element={<SavedMovies />}
             currentUser={currentUser}
           />
-          <ProtectedRoute
+          <Route
             path="/profile"
             exact
-            loggedIn={loggedIn}
-            component={Profile}
+            element={<Profile />}
           />
           <Route exact path="/*">
             <NotFoundPage />
