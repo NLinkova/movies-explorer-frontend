@@ -13,7 +13,7 @@ import Main from '../Main/Main';
 // import Movies from '../Movies/Movies';
 // import SavedMovies from '../SavedMovies/SavedMovies';
 // import Profile from '../Profile/Profile';
-// import Footer from '../Footer/Footer';
+import Footer from '../Footer/Footer';
 
 // import Register from '../Register/Register';
 // import Login from '../Login/Login';
@@ -28,37 +28,37 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <Router>
       <div className="page">
-      <Header bgColor="blue" />
-        <Routes>
-          <Route exact path="/" element={<Main />}></Route>
-          {/* <Route exact path="/signin">
-            <Login />
-          </Route>
-          <Route exact path="/signup">
-            <Register
+        <Header bgColor="blue" />
+          <Routes>
+            <Route exact path="/" element={<Main />}></Route>
+            {/* <Route exact path="/signin">
+              <Login />
+            </Route>
+            <Route exact path="/signup">
+              <Register
+              />
+            </Route>
+            <Route
+              exact
+              path="/movies"
+              element={<Movies />}
             />
-          </Route>
-          <Route
-            exact
-            path="/movies"
-            element={<Movies />}
-          />
-          <Route
-            exact
-            path="/saved-movies"
-            element={<SavedMovies />}
-            currentUser={currentUser}
-          />
-          <Route
-            path="/profile"
-            exact
-            element={<Profile />}
-          />
-          <Route exact path="/*">
-            <NotFoundPage />*/}
-          {/* </Route>  */}
-        </Routes>
-        {/* <Footer /> */}
+            <Route
+              exact
+              path="/saved-movies"
+              element={<SavedMovies />}
+              currentUser={currentUser}
+            />
+            <Route
+              path="/profile"
+              exact
+              element={<Profile />}
+            />
+            <Route exact path="/*">
+              <NotFoundPage />*/}
+            {/* </Route>  */}
+          </Routes>
+        <Footer />
       </div>
       </Router>
     </CurrentUserContext.Provider>
