@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   min-height: 74px;
-  width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   color: #FFFFFF;
 }
@@ -22,6 +22,10 @@
   width: 36px;
   height: 36px;
   margin: 18 auto 18px 70px;
+}
+
+.header__logo:hover {
+  opacity: 0.5;
 }
 
 .header__list-links {
@@ -49,7 +53,10 @@
   padding: 8px 20px;
   border-radius: 6px;
   text-decoration: none;
-  transition: opacity linear 0.5s;
+}
+
+.header__list-link:hover {
+  opacity: 0.5;
 }
 
 .header__list-link_btn {
@@ -65,4 +72,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 804px) {
+  .header {
+    padding: 0 30px;
+  }
 }

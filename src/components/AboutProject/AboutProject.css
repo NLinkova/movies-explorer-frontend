@@ -1,6 +1,7 @@
 .about {
   margin: 0 auto;
   padding: 110px 70px;
+  max-width: 100%;
 }
 
 .about__title {
@@ -77,4 +78,15 @@
   line-height: 17px;
   margin: 14px 0 0 0;
   color: #8B8B8B;
+}
+
+@media screen and (max-width: 804px) {
+  .about {
+    padding: 90px 50px;
+  }
+
+  .about__description_content {
+    font-size: 12px;
+    line-height: 18px;
+  }
 }

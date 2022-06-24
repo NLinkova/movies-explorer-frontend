@@ -1,9 +1,9 @@
 .footer {
-  margin: 0 auto;
+  margin: 0;
   background: #202020;
   padding: 79px 70px 20px;
   display: flex;
-  width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   flex-direction: column;
 }
@@ -14,7 +14,7 @@
   font-size: 13px;
   line-height: 16px;
   text-align: center;
-  margin: 0 0 20px;
+  box-sizing: border-box;
 }
 
 .footer__title::after {
@@ -55,4 +55,10 @@
   transition: ease-in-out .3s;
   margin: 0;
   padding: 0;
+}
+
+@media screen and (max-width: 804px) {
+  .footer {
+    padding: 80px 30px 20px;
+  }
 }
