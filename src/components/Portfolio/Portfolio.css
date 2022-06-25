@@ -72,8 +72,29 @@
   .portfolio__arrow {
     max-width: 27px;
   }
+}
 
-  .portfolio__item {
-    margin-bottom: 20px;
+
+@media screen and (max-width: 420px) {
+  .portfolio {
+    padding: 0 14px 70px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    margin: 0 auto 40px;
+  }
+
+  .portfolio__subtitle {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__arrow {
+    max-width: 18px;
+  }
+
+  .portfolio__item::after {
+    border-bottom: 1px solid #E6E6E6;
   }
 }

@@ -91,3 +91,32 @@
     margin-bottom: 83px;
   }
 }
+
+@media screen and (max-width: 420px) {
+  .techs {
+    padding: 70px 18px;
+    background: #202020
+  }
+
+  .techs__title {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.04em;
+  }
+
+  .techs__title::after {
+    margin-bottom: 60px;
+  }
+
+  .techs__subtitle {
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -0.04em;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 auto 50px;
+  }
+}

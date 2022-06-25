@@ -19,8 +19,8 @@
 }
 
 .header__logo {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   margin: 18 auto 18px 70px;
 }
 
@@ -36,10 +36,6 @@
   padding: 0;
   list-style-type: none;
   text-decoration: none;
-}
-
-.header__item {
-  margin-right: 10px;
 }
 
 .header__list-link {
@@ -77,5 +73,25 @@
 @media screen and (max-width: 804px) {
   .header {
     padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .header {
+    padding: 0 14px;
+  }
+
+  .header__list-link {
+    padding: 8px 14px;
+    font-size: 10px;
+  }
+
+  .header__sign-text {
+    font-size: 10px;
+  }
+
+  .header__btn {
+    width: 54px;
+    height: 26px;
   }
 }

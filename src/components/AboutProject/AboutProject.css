@@ -22,14 +22,13 @@
 
 .about__description {
   padding: 0;
-  margin: 0;
   list-style-type: none;
   display: flex;
   margin: 0 auto 110px;
   column-gap: 30px;
 }
 
-.about__description_title {
+.about__description-title {
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
@@ -37,7 +36,7 @@
   margin: 0;
 }
 
-.about__description_content {
+.about__description-content {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
@@ -85,8 +84,57 @@
     padding: 90px 50px;
   }
 
-  .about__description_content {
+  .about__description-content {
     font-size: 12px;
     line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .about {
+    padding: 70px 18px;
+  }
+
+  .about__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about__description {
+    margin: 0 auto 60px;
+    display: inline-block;
+  }
+
+  .about__title::after {
+    margin-bottom: 60px;
+  }
+
+  .about__description-title {
+    font-size: 18px;
+    margin: 0 0 16px 0;
+  }
+
+  .about__description-content {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 auto 56px;
+  }
+
+  .about__description-content_last {
+    margin-bottom: 0;
+  }
+
+  .about__duration {
+    grid-template-columns: 30% 70%;
+  }
+
+  .about__duration-title {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about__duration-subtitle {
+    font-size: 11px;
+    line-height: 13px;
   }
 }

@@ -15,6 +15,7 @@
   line-height: 16px;
   text-align: center;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .footer__title::after {
@@ -60,5 +61,42 @@
 @media screen and (max-width: 804px) {
   .footer {
     padding: 80px 30px 20px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .footer {
+    padding: 80px 10px 10px;
+  }
+
+  .footer__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .footer__nav {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer__list {
+    margin-top: 30px;
+    flex-direction: column;
+    row-gap: 12px;
+  }
+
+  .footer__link {
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+  }
+
+  .footer__copyright {
+    margin-top: 30px;
+    align-items: center;
+    color: #8B8B8B;
+    order: 4;
+    font-size: 12px;
+    line-height: 15px;
   }
 }

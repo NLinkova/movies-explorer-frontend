@@ -61,7 +61,6 @@
 }
 
 @media screen and (max-width: 804px) {
-
   .promo__wrapper {
     flex-direction: column;
     align-items: center;
@@ -89,7 +88,6 @@
   }
 
   .promo__image {
-    margin: 0 auto;
     margin: 140px auto 48px;
     order: -1;
     max-width: 310px;
@@ -101,4 +99,34 @@
     align-self: center;
     margin: 0 auto 10px;
   }
+}
+
+@media screen and (max-width: 420px) {
+  .promo__wrapper {
+    padding: 0 30px 30px;
+  }
+
+  .promo__image {
+    margin: 70px auto 44px;
+    max-width: 210px;
+    max-height: 206px;
+  }
+
+  .promo__title {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .promo__subtitle {
+    margin: 24px auto 80px;
+  }
+
+  .promo__learn-more {
+    margin: 0;
+  }
+
+  .promo__link {
+    font-size: 10px;
+  }
+
 }
