@@ -15,7 +15,7 @@
   line-height: 16px;
   text-align: center;
   box-sizing: border-box;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .footer__title::after {
@@ -30,6 +30,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 20px;
 }
 
 .footer__copyright {
