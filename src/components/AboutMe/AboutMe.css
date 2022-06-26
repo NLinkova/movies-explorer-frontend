@@ -109,7 +109,7 @@
   border-radius: 10px;
   object-fit: contain;
   flex-basis: min-content;
-  margin: 0 auto;
+  margin: 0 0 auto auto;
 }
 
 @media screen and (max-width: 804px) {
@@ -123,7 +123,6 @@
 
   .about-me__profile-photo {
     max-width: 33vw;
-    /* max-height: 307px; */
     border-radius: 10px;
     object-fit: contain;
     margin: 0;

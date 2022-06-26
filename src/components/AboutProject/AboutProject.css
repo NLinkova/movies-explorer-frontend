@@ -9,6 +9,7 @@
   font-size: 22px;
   line-height: 27px;
   white-space: nowrap;
+  margin: 0;
 }
 
 .about__title::after {
