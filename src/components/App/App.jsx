@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   Route,
   Routes,
-  Navigate,
+  useNavigate,
   BrowserRouter as Router,
 } from 'react-router-dom';
 import './App.css';
@@ -17,7 +17,7 @@ import Footer from '../Footer/Footer';
 
 // import Register from '../Register/Register';
 // import Login from '../Login/Login';
-// import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -28,9 +28,8 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <Router>
       <div className="page">
-        <Header bgColor="blue" />
           <Routes>
-            <Route exact path="/" element={<Main />}></Route>
+            <Route exact path="/" element={<><Header bgColor="blue" /> <Main /><Footer /></>}></Route>
             {/* <Route exact path="/signin">
               <Login />
             </Route>
@@ -53,12 +52,9 @@ function App() {
               path="/profile"
               exact
               element={<Profile />}
-            />
-            <Route exact path="/*">
-              <NotFoundPage />*/}
-            {/* </Route>  */}
+            />*/}
+            <Route exact path="*" element={<NotFoundPage />}></Route>
           </Routes>
-        <Footer />
       </div>
       </Router>
     </CurrentUserContext.Provider>
