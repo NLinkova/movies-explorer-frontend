@@ -15,8 +15,8 @@ import Main from '../Main/Main';
 // import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 
-// import Register from '../Register/Register';
-// import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -30,14 +30,9 @@ function App() {
       <div className="page">
           <Routes>
             <Route exact path="/" element={<><Header bgColor="blue" /> <Main /><Footer /></>}></Route>
-            {/* <Route exact path="/signin">
-              <Login />
-            </Route>
-            <Route exact path="/signup">
-              <Register
-              />
-            </Route>
-            <Route
+           <Route exact path="/signin" element={<Login />}></Route>
+            <Route exact path="/signup" element={<Register />}></Route>
+             {/* <Route
               exact
               path="/movies"
               element={<Movies />}
