@@ -67,6 +67,12 @@ function HeaderAuth() {
               </li>
             </ul>
           </nav>
+          <div className="header-auth__burger-account">
+            <Link to="/profile" className="header-auth__burger-account-link">
+              <span className="header-auth__burger-text">Аккаунт</span>
+              <img className="header-auth__burger-icon" alt="Аккаунт" src={icon}></img>
+            </Link>
+          </div>
         </div>
       </div>
     </header>
