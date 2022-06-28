@@ -9,10 +9,11 @@ import './App.css';
 
 // import Preloader from '../Preloader/Preloader';
 import Header from '../Header/Header';
+import HeaderAuth from '../HeaderAuth/HeaderAuth';
 import Main from '../Main/Main';
 // import Movies from '../Movies/Movies';
 // import SavedMovies from '../SavedMovies/SavedMovies';
-// import Profile from '../Profile/Profile';
+import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 
 import Register from '../Register/Register';
@@ -24,12 +25,13 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Router>
       <div className="page">
           <Routes>
-            <Route exact path="/" element={<><Header bgColor="blue" /> <Main /><Footer /></>}></Route>
+            <Route exact path="/" element={<><Header /> <Main /><Footer /></>}></Route>
            <Route exact path="/signin" element={<Login />}></Route>
             <Route exact path="/signup" element={<Register />}></Route>
              {/* <Route
@@ -42,12 +44,11 @@ function App() {
               path="/saved-movies"
               element={<SavedMovies />}
               currentUser={currentUser}
-            />
+            />*/}
             <Route
               path="/profile"
               exact
-              element={<Profile />}
-            />*/}
+              element={<><HeaderAuth /> <Profile /> </>}></Route>
             <Route exact path="*" element={<NotFoundPage />}></Route>
           </Routes>
       </div>

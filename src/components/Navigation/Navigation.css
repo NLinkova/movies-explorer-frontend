@@ -3,59 +3,29 @@
   column-gap: 16px;
   padding: 0;
   margin: 0;
+  list-style-type: none;
+  text-decoration: none;
 }
 
 .navigation__list-item {
   list-style: none;
 }
 
-.navigation__movies {
-  font-family: Inter, sans-serif;
+.navigation__link {
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 13px;
   line-height: 18px;
-  color: #000;
-  text-decoration: none;
-}
-
-.navigation__movies:hover {
-  opacity: 0.6;
-  text-decoration: underline;
-}
-
-.navigation__movies-black {
-  color: #000
-}
-
-.navigation__movies-white {
   color: #fff;
-}
-
-.navigation__saved-movies {
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 18px;
-  color: #000;
   text-decoration: none;
+  text-align: right;
 }
 
-.navigation__saved-movies:hover {
+.navigation__link:hover {
   opacity: 0.6;
-  text-decoration: underline;
 }
 
-.navigation__saved-movies-white {
-  color: #fff;
-}
-
-.navigation__saved-movies-black {
-  color: #000;
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 804px) {
   .navigation {
     display: none;
   }
