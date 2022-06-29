@@ -1,0 +1,39 @@
+{
+  "name": "Movie Explorer",
+  "short_name": "Movies",
+  "description": "Movie library with short description and saved favourite movies",
+  "scope": "/",
+  "display": "standalone",
+  "start_url": "/",
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/android-chrome192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/android-chrome512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

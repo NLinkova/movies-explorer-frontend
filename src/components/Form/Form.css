@@ -57,10 +57,6 @@
   margin: 0 auto 10px auto;
 }
 
-/* .form__input:last-of-type {
-  margin-bottom: 42px;
-} */
-
 .form__input:focus {
   background: #202020;
   border-bottom: 1px solid #4285F4;
@@ -80,7 +76,7 @@
   margin: 6px 0;
 }
 
-.form__text-error {
+/* .form__text-error {
   display: block;
   color: #ee3465;
   font-size: 14px;
@@ -89,7 +85,7 @@
   text-align: center;
   min-height: 50px;
   visibility: hidden;
-}
+} */
 
 .form__text-error_visible {
   visibility: visible;

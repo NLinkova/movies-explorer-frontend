@@ -125,6 +125,7 @@
   margin: 0;
   padding: 0;
   row-gap: 28px;
+  text-align: center;
 }
 
 .header-auth__burger-item {
@@ -140,6 +141,7 @@
   line-height: 22px;
   color: #fff;
   text-decoration: none;
+  text-align: center;
 }
 
 .header-auth__burger-link:hover {
@@ -148,19 +150,6 @@
 
 .header-auth__burger-link:active {
   text-decoration: underline;
-}
-
-.header-auth__container_burger-menu {
-  color: #fff;
-}
-
-.header-auth__sign-text {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  color: #000;
-  text-decoration: none;
 }
 
 @media screen and (max-width: 804px) {
