@@ -55,6 +55,7 @@
   line-height: 17px;
   font-weight: 500;
   margin: 0 auto 10px auto;
+  flex-grow: 1;
 }
 
 .form__input:focus {

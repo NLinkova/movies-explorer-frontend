@@ -1,0 +1,98 @@
+.movies__list-poster {
+  width: 270px;
+  height: 151px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  object-fit: contain;
+  background-color: #202020;
+}
+
+.movies__list-description {
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0 25px 0;
+  /* min-height: 36px; */
+}
+
+.movies__list-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 0;
+}
+
+.movies__list-like-button {
+  background: url('../../images/like-inactive.svg') center no-repeat;
+  background-color: #313131;
+  border: 1px solid transparent;
+  width: 24px;
+  height: 24px;
+  border-radius: 36px;
+  outline: none;
+  padding: 0;
+  transition: border-color 0.3s;
+}
+
+.movies__list-like-button:hover {
+  cursor: pointer;
+  border: 1px solid #EE3465;
+}
+
+.movies__list-like-button_clicked {
+  background: url('../../images/like-active.svg') center no-repeat;
+  background-color: #313131;
+}
+
+.movies__list-delete-button {
+  background: url('../../images/button-remove.svg') center no-repeat;
+  background-color: #313131;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s;
+}
+
+.movies__list-delete-button_visible {
+  visibility: visible;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.movies__list-duration {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8B8B8B;
+  margin: 0;
+  padding-top: 6px;
+  border-top: 1px solid #424242;
+}
+
+@media(max-width: 820px) {
+  .movies__list-poster {
+    width: 339px;
+    height: 190px;
+  }
+}
+
+@media(max-width: 420px) {
+  .movies__list-poster {
+    width: 300px;
+    height: 168px;
+  }
+
+  .movies__list-title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .movies__list-duration {
+    font-size: 10px;
+    line-height: 12px;
+  }
+}

@@ -11,7 +11,7 @@ import './App.css';
 import Header from '../Header/Header';
 import HeaderAuth from '../HeaderAuth/HeaderAuth';
 import Main from '../Main/Main';
-// import Movies from '../Movies/Movies';
+import Movies from '../Movies/Movies';
 // import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
@@ -31,24 +31,24 @@ function App() {
       <Router>
       <div className="page">
           <Routes>
-            <Route exact path="/" element={<><Header /> <Main /><Footer /></>}></Route>
+            <Route exact path="/" element={<><Header /> <Main loggedIn={false} /><Footer /></>}></Route>
            <Route exact path="/signin" element={<Login />}></Route>
             <Route exact path="/signup" element={<Register />}></Route>
-             {/* <Route
+              <Route
               exact
               path="/movies"
-              element={<Movies />}
+              element={<><HeaderAuth /> <Movies loggedIn={true} /> <Footer /></>}
             />
-            <Route
+            {/*<Route
               exact
               path="/saved-movies"
-              element={<SavedMovies />}
+              element={<SavedMovies loggedIn={true} />}
               currentUser={currentUser}
             />*/}
             <Route
               path="/profile"
               exact
-              element={<><HeaderAuth /> <Profile /> </>}></Route>
+              element={<><HeaderAuth /> <Profile loggedIn={true} /> </>}></Route>
             <Route exact path="*" element={<NotFoundPage />}></Route>
           </Routes>
       </div>
