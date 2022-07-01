@@ -3,6 +3,12 @@ import "./Promo.css";
 import www from "../../images/landing-logo.svg";
 
 function Promo() {
+
+  const scroll = () => {
+    const section = document.getElementById('about');
+    section.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+  };
+
   return (
     <div className="promo">
       <div className="promo__wrapper">
@@ -14,7 +20,7 @@ function Promo() {
           <h3 className="promo__subtitle">
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </h3>
-          <button className="promo__learn-more">Узнать больше</button>
+          <button className="promo__learn-more" onClick={scroll}>Узнать больше</button>
         </div>
         <img src={www} alt="картинка глобуса" className="promo__image" />
       </div>

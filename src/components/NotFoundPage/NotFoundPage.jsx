@@ -10,7 +10,7 @@ function NotFoundPage() {
       <div className="not-found__container">
         <p className="not-found__error">404</p>
         <p className="not-found__text">Страница не найдена</p>
-        <p className="not-found__back" onClick={() => navigate.goBack()}>
+        <p className="not-found__back" onClick={() => navigate(-1)}>
           Назад
         </p>
       </div>

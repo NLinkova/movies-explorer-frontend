@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import logo from '../../images/logo.svg';
 import icon from '../../images/accountIcon.svg'
@@ -8,8 +8,6 @@ import './HeaderAuth.css';
 import Navigation from '../Navigation/Navigation';
 
 function HeaderAuth() {
-  const { pathname } = useLocation();
-
   const [activeBurger, setActiveBurger] = React.useState(false);
 
   function handleActiveBurger() {

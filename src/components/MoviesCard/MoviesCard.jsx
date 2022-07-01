@@ -24,7 +24,7 @@ function MoviesCard(props) {
           <div onMouseEnter={handleCardMouseOver} onMouseLeave={handleCardMouseOut} className="movies__list-description">
               <p className="movies__list-title">33 слова о дизайне</p>
               {props.saved ?
-                  <button className={`movies__list-delete-button ${isDeleteButton ? 'movies__list-delete-button_' : ''}`}></button> :
+                  <button className={`movies__list-delete-button ${isDeleteButton ? 'movies__list-delete-button_visible ' : ''}`}></button> :
                   <button className={`movies__list-like-button ${isLiked ? 'movies__list-like-button_clicked' : ''}`} onClick={handleLikeButtonCLick}></button>}
           </div>
           <p className="movies__list-duration">1ч42м</p>

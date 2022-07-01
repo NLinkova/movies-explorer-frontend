@@ -96,3 +96,9 @@
     line-height: 12px;
   }
 }
+
+@media(max-width: 320px) {
+  .movies__list-poster {
+    max-width: 93%;
+  }
+}

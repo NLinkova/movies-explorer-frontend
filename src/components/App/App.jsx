@@ -12,7 +12,7 @@ import Header from '../Header/Header';
 import HeaderAuth from '../HeaderAuth/HeaderAuth';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
-// import SavedMovies from '../SavedMovies/SavedMovies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 
@@ -39,12 +39,12 @@ function App() {
               path="/movies"
               element={<><HeaderAuth /> <Movies loggedIn={true} /> <Footer /></>}
             />
-            {/*<Route
+            <Route
               exact
               path="/saved-movies"
-              element={<SavedMovies loggedIn={true} />}
+              element={<><HeaderAuth /><SavedMovies loggedIn={true} /> <Footer /></>}
               currentUser={currentUser}
-            />*/}
+            />
             <Route
               path="/profile"
               exact
