@@ -77,17 +77,6 @@
   margin: 6px 0;
 }
 
-/* .form__text-error {
-  display: block;
-  color: #ee3465;
-  font-size: 14px;
-  line-height: 1.21;
-  margin: 146px 0 10px 0;
-  text-align: center;
-  min-height: 50px;
-  visibility: hidden;
-} */
-
 .form__text-error_visible {
   visibility: visible;
 }
@@ -114,10 +103,6 @@
 .form__btn:hover {
   opacity: 0.5;
 }
-
-/* .form__btn_disabled {
-  opacity: 0.5;
-} */
 
 .form__btn_disabled:hover {
   opacity: 0.5;

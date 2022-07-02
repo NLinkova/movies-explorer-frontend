@@ -16,14 +16,7 @@ function Profile({ signOut, updateUser, isLoading, textError }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    updateUser({
-      name: form.values.name,
-      email: form.values.email,
-    });
   }
-  console.log(textError);
-
-
   if (isLoading) {
     return <Preloader />
   } else {

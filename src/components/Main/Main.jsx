@@ -10,7 +10,7 @@ function Main() {
     <div className="Main">
       <Promo />
       <AboutProject />
-     <Techs />
+      <Techs />
       <AboutMe/>
       <Portfolio />
     </div>

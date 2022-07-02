@@ -29,12 +29,11 @@ function SearchForm({
         </fieldset>
       </form>
       <div>
-      <FilterCheckbox
-        isShortFilms={isShortFilms}
-        setIsShortFilms={setIsShortFilms}
-      />
-   {/* <p className="search__toggle-text">Короткометражки</p> */}
-    </div>
+        <FilterCheckbox
+          isShortFilms={isShortFilms}
+          setIsShortFilms={setIsShortFilms}
+        />
+      </div>
     </div>
   );
 }

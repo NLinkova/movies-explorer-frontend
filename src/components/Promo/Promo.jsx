@@ -3,7 +3,6 @@ import "./Promo.css";
 import www from "../../images/landing-logo.svg";
 
 function Promo() {
-
   const scroll = () => {
     const section = document.getElementById('about');
     section.scrollIntoView( { behavior: 'smooth', block: 'start' } );

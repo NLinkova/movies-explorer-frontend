@@ -2,10 +2,9 @@ import React, { memo } from 'react';
 import './Register.css';
 import Form from '../Form/Form';
 
-const Register = memo(({ authRegister, textError, clearTextError }) => {
+const Register = memo(({ textError, clearTextError }) => {
   function handleSubmit(e, { name, email, password }) {
     e.preventDefault();
-    authRegister(name, email, password);
   }
 
   return (

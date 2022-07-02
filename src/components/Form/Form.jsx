@@ -1,6 +1,6 @@
 import logo from '../../images/logo.svg';
 
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../utils/useForm';
 import './Form.css';

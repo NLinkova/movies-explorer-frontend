@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 
-// import Preloader from '../Preloader/Preloader';
+import Preloader from '../Preloader/Preloader';
 import Header from '../Header/Header';
 import HeaderAuth from '../HeaderAuth/HeaderAuth';
 import Main from '../Main/Main';
@@ -25,19 +25,23 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
+  if (isLoading) {
+    return <Preloader />;
+  }
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Router>
       <div className="page">
           <Routes>
             <Route exact path="/" element={<><Header /> <Main loggedIn={false} /><Footer /></>}></Route>
-           <Route exact path="/signin" element={<Login />}></Route>
+            <Route exact path="/signin" element={<Login />}></Route>
             <Route exact path="/signup" element={<Register />}></Route>
-              <Route
-              exact
-              path="/movies"
-              element={<><HeaderAuth /> <Movies loggedIn={true} /> <Footer /></>}
+            <Route
+            exact
+            path="/movies"
+            element={<><HeaderAuth /> <Movies loggedIn={true} /> <Footer /></>}
             />
             <Route
               exact

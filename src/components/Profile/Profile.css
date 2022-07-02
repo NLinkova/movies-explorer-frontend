@@ -71,21 +71,6 @@
   margin: 6px 0;
 }
 
-/* .profile__text-error {
-  display: block;
-  color: #ee3465;
-  font-size: 11px;
-  line-height: 1.21;
-  margin: 0px 0 10px 0;
-  text-align: center;
-  min-height: 50px;
-  visibility: hidden;
-}
-
-.profile__text-error_visible {
-  visibility: visible;
-} */
-
 .profile__btn {
   display: block;
   margin: 220px auto 16px auto;

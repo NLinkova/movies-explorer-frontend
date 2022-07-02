@@ -4,10 +4,10 @@ import './SavedMovies.css';
 
 function SavedMovies(props) {
     return (
-        <section className="saved-movies">
-            <SearchForm page={'saved-movies'} />
-            <MoviesCardList page={'saved-movies'} saved={true}/>
-        </section>
+      <section className="saved-movies">
+        <SearchForm page={'saved-movies'} />
+        <MoviesCardList page={'saved-movies'} saved={true}/>
+      </section>
     )
 }
 
