@@ -11,6 +11,7 @@
   border-bottom: 1px solid #AAAAAA;
   opacity: 0.2;
   width: 100%;
+  z-index: 0;
 }
 
 .search__form {
