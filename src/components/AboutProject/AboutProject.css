@@ -1,0 +1,141 @@
+.about {
+  margin: 0 auto;
+  padding: 110px 70px;
+  max-width: 100%;
+}
+
+.about__title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.about__title::after {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  border-bottom: 1px solid #DADADA;
+  padding-top: 23px;
+  margin-bottom: 70px;
+}
+
+.about__description {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  margin: 0 auto 110px;
+  column-gap: 30px;
+}
+
+.about__description-title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 26px;
+  margin: 0;
+}
+
+.about__description-content {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0;
+}
+
+.about__duration {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  list-style-type: none;
+  align-items: baseline;
+  padding: 0;
+  margin: 0;
+}
+
+.about__duration-title {
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #303030;
+  font-size: 14px;
+  line-height: 16px;
+  min-height: 36px;
+  margin: 0;
+}
+
+.about__duration-title_backend {
+  background: #2BE080;
+  color: #000000;
+}
+
+.about__duration-subtitle {
+  font-weight: 400;
+  text-align: center;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 14px 0 0 0;
+  color: #8B8B8B;
+}
+
+@media screen and (max-width: 804px) {
+  .about {
+    padding: 90px 50px;
+  }
+
+  .about__description-content {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .about {
+    padding: 70px 18px;
+  }
+
+  .about__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about__description {
+    margin: 0 auto 60px;
+    display: inline-block;
+  }
+
+  .about__title::after {
+    margin-bottom: 60px;
+  }
+
+  .about__description-title {
+    font-size: 18px;
+    margin: 0 0 16px 0;
+  }
+
+  .about__description-content {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 auto 56px;
+  }
+
+  .about__description-content_last {
+    margin-bottom: 0;
+  }
+
+  .about__duration {
+    grid-template-columns: 30% 70%;
+  }
+
+  .about__duration-title {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about__duration-subtitle {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

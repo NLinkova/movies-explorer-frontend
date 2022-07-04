@@ -1,0 +1,19 @@
+.saved-movies {
+  background: #202020;
+  max-width: 100%;
+  flex-grow: 1;
+  padding: 0 70px 100px;
+  margin: 0 0 140px;
+}
+
+@media screen and (max-width: 820px) {
+  .saved-movies {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .saved-movies {
+    padding: 0 10px;
+  }
+}
