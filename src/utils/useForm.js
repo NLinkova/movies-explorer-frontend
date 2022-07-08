@@ -1,27 +1,44 @@
-import { useState, useCallback } from "react";
+import React from "react";
+import validation from "./validation";
 
-export function useForm(inputs) {
-  const [values, setValues] = useState(inputs);
-  const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(false);
+export function useForm() {
+  const [values, setValues] = React.useState({});
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
+  const [isFocused, setIsFocused] = React.useState(false);
 
-  const handleChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
-    setIsValid(target.closest("form").checkValidity());
+  const onFocus = () => {
+    setIsFocused(true);
   };
 
-  const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
-      setValues(newValues);
+  const handleChange = (event) => {
+    const { target } = event;
+    const { name } = target;
+    const { value } = target;
+    const error = validation(name, value);
+    setErrors(validation(name, value));
+    setValues({ ...values, [name]: value });
+    if (Object.keys(error).length === 0) {
+      setIsValid(target.closest("form").checkValidity());
+    }
+  };
+
+  const resetForm = React.useCallback(
+    (newErrors = {}, newIsValid = false) => {
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
-    [setValues, setErrors, setIsValid]
+    [setErrors, setIsValid]
   );
 
-  return { values, handleChange, errors, isValid, resetForm };
+  return {
+    values,
+    handleChange,
+    errors,
+    isValid,
+    resetForm,
+    onFocus,
+    isFocused,
+    setValues,
+  };
 }

@@ -69,7 +69,19 @@ register (name, email, password) {
     return fetch(`${this._baseUrl}/movies`, {
       headers: this._getHeaders(),
       method: 'POST',
-      body: JSON.stringify(movie),
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
+        trailer: movie.trailerLink,
+        movieId: movie.id.toString(),
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+        thumbnail: `https://api.nomoreparties.co${movie.image.url}`,
+      }),
     }).then(this._checkResponse);
   }
 
@@ -90,13 +102,13 @@ register (name, email, password) {
   }
 
   // Сохранение на сервере информация о пользователе
-  saveUserInfoToServer(user) {
+  saveUserInfoToServer(name, email) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._getHeaders(),
       body: JSON.stringify({
-        name: user.name,
-        about: user.about,
+        name,
+        email,
       }),
     }).then(this._checkResponse);
   }

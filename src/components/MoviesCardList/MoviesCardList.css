@@ -64,6 +64,10 @@
   color: #000;
 }
 
+.movies__not-found_invisible {
+  display: none;
+}
+
 @media(max-width: 1279px) {
   .movies__list {
     grid-template-columns: repeat(3, auto);

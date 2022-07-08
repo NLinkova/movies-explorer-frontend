@@ -3,41 +3,14 @@ import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm({
-  runSearch,
-  runSearchSavedMovies,
-  page,
-  searchTrigger,
-  onFilter,
-  isShortMovie,
+  onSubmit,
+  searchValue,
+  setSearchValue,
+  inputError,
+  setInputError,
+  isShortFilms,
+  setIsShortFilms,
 }) {
-  const [inputSearch, setInputSearch] = useState('');
-  const [isValid, setIsValid] = useState(true);
-
-  function handleChange(e) {
-    setInputSearch(e.target.value);
-    if (e.target.value) {
-      setIsValid(true);
-    }
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(e)
-    const strSearch = inputSearch.toLowerCase();
-    if (inputSearch) {
-      searchTrigger(true);
-      setIsValid(true);
-      if (page === 'movies') {
-        runSearch(strSearch);
-        return;
-      }
-      if (page === 'saved-movies') {
-        runSearchSavedMovies(strSearch);
-        return;
-      }
-    }
-    setIsValid(false);
-  }
 
   return (
     <div className='search'>
@@ -45,7 +18,7 @@ function SearchForm({
         className='search__form'
         noValidate
         autoComplete='off'
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
       >
         <fieldset className='search__field'>
           <input
@@ -54,20 +27,20 @@ function SearchForm({
             placeholder='Фильм'
             name="search"
             required
-            onChange={handleChange}
-            value={inputSearch}
+            value={searchValue}
+            onChange={(event) => setSearchValue(event.target.value)}
+            onClick={() => setInputError('')}
           />
           <button className='search__submit' type='submit'>Поиск</button>
         </fieldset>
         <div>
-          <span className="search__input-error">{!isValid && 'Нужно ввести ключевое слово'}</span>
+          <span className="search__input-error">{inputError}</span>
         </div>
       </form>
       <div>
         <FilterCheckbox
-          page={page}
-          isShortMovie={isShortMovie}
-          onFilter={onFilter}
+          isShortFilms={isShortFilms}
+          setIsShortFilms={setIsShortFilms}
         />
       </div>
     </div>
