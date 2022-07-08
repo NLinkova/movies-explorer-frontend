@@ -1,15 +1,16 @@
 import './FilterCheckbox.css';
 
-function FilterCheckbox({ isShortFilms, setIsShortFilms }) {
+function FilterCheckbox({ page, onFilter, isShortMovie }) {
+  function handleOnFilter() {
+    onFilter(page);
+  }
   return (
     <div className="filter">
       <label className="filter__checkbox">
         <input
           type="checkbox"
           className="filter__input"
-          onClick={() => {
-            setIsShortFilms(!isShortFilms);
-          }}
+          onClick={handleOnFilter}
         />
         <span className="filter__round" />
       </label>

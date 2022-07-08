@@ -102,7 +102,7 @@ const Form = memo(
           {name === 'sign-up' && (
             <p className="form__text">
               Уже зарегистрированы?{' '}
-              <Link to="/sign-in" className="form__link">
+              <Link to="/signin" className="form__link">
                 Войти
               </Link>
             </p>
@@ -110,7 +110,7 @@ const Form = memo(
           {name === 'sign-in' && (
             <p className="form__text">
               Еще не зарегистрированы?{' '}
-              <Link to="/sign-up" className="form__link">
+              <Link to="/signup" className="form__link">
                 Регистрация
               </Link>
             </p>

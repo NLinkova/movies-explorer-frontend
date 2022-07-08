@@ -6,6 +6,14 @@
   background-color: #202020;
 }
 
+.movies__list-poster:hover {
+  opacity: 0.8;
+}
+
+.movie__trailer-link:hover {
+  opacity: 0.8;
+}
+
 .movies__list-description {
   display: flex;
   justify-content: space-between;

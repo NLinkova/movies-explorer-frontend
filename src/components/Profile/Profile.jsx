@@ -6,12 +6,8 @@ import Preloader from '../Preloader/Preloader';
 import './Profile.css';
 
 function Profile({ signOut, updateUser, isLoading, textError }) {
-  // const currentUser = useContext(CurrentUserContext);
-  //временное решение для разработки интерфейса
-  const currentUser = {
-    'name': 'Наталья',
-    'email': 'email11@email.com'
-  };
+  const currentUser = useContext(CurrentUserContext);
+
   const form = useForm({ name: currentUser.name, email: currentUser.email });
 
   function handleSubmit(e) {
@@ -32,7 +28,7 @@ function Profile({ signOut, updateUser, isLoading, textError }) {
                 name="name"
                 type="text"
                 onChange={form.handleChange}
-                value={form.values.name || ''}
+                value={form.values.name || currentUser.name}
                 minLength="2"
                 maxLength="40"
                 required
@@ -48,7 +44,7 @@ function Profile({ signOut, updateUser, isLoading, textError }) {
                 name="email"
                 type="email"
                 onChange={form.handleChange}
-                value={form.values.email || ''}
+                value={form.values.email || currentUser.email}
                 minLength="2"
                 maxLength="40"
                 required
