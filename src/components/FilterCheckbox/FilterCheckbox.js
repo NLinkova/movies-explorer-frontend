@@ -1,15 +1,13 @@
 import './FilterCheckbox.css';
 
-function FilterCheckbox({ isShortFilms, setIsShortFilms }) {
+function FilterCheckbox(props) {
   return (
     <div className="filter">
       <label className="filter__checkbox">
         <input
           type="checkbox"
           className="filter__input"
-          onClick={() => {
-            setIsShortFilms(!isShortFilms);
-          }}
+          onChange={props.onChange} checked={props.isChecked}
         />
         <span className="filter__round" />
       </label>

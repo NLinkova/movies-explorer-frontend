@@ -1,7 +1,7 @@
 import { URL_BEATFILM } from '../constants/constants';
 
 class MoviesApi {
-  constructor({ baseUrl, headers, credentials }) {
+  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
@@ -17,7 +17,9 @@ class MoviesApi {
   getAllMovies() {
     return fetch(`${this._baseUrl}`, {
       headers: this._headers,
-    }).then(this._checkResponse);
+    }).then(this._checkResponse)
+    // .then(res => res.json())
+    //     .then(data => data)
   }
 }
 

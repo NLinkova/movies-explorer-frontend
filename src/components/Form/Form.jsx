@@ -13,6 +13,8 @@ const Form = memo(
     isLoading,
     btnName,
     textError,
+    registeredError,
+    loginError
   }) => {
     const form = useForm();
 
@@ -70,6 +72,12 @@ const Form = memo(
           <span className="form__error">{`${
             form.errors.email ? form.errors.email : ''
           }`}</span>
+           {registeredError && (
+        <p className="form__error">Произошла ошибка при регистрации. Попробуйте еще раз</p>
+      )}
+            {loginError && (
+        <p className="form__error">Произошла ошибка при попытке войти. Попробуйте еще раз</p>
+      )}
           <label className="form__field" htmlFor="form-password-">
             Пароль
           </label>
@@ -85,13 +93,12 @@ const Form = memo(
           <span className="form__error">{`${
             form.errors.password ? form.errors.password : ''
           }`}</span>
-          {/* <span
-            className={`form__text-error ${
-              textError && 'form__text-error_visible'
-            }`}
-          >
-            {textError && textError}
-          </span> */}
+           {registeredError && (
+        <p className="form__error">Произошла ошибка при регистрации. Попробуйте еще раз</p>
+      )}
+            {loginError && (
+        <p className="form__error">Произошла ошибка при попытке войти. Попробуйте еще раз</p>
+      )}
           <button
             type="submit"
             className={`form__btn ${!form.isValid && 'form__btn_disabled'} ${name === 'sign-in' && 'form__btn_login'}`}

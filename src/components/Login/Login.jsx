@@ -8,7 +8,7 @@ const Login = memo(({ authLogin, textError, clearTextError }) => {
     if (!email || !password) {
       return;
     }
-    authLogin(email, password).catch((err) => console.log(err));
+    authLogin(email, password);
   }
   return (
     <section className="login__page">

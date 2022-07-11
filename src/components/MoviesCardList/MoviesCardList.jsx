@@ -1,118 +1,86 @@
 import './MoviesCardList.css';
-import MoviesCard from "../MoviesCard/MoviesCard";
-import Preloader from "../Preloader/Preloader";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import poster from '../../images/movies/movie-1.jpg';
+import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({
-  movies,
-  visibilityMoviesList,
-  renderedFilms,
-  setRenderedFilms,
-  handleMoreRenderFilms,
-  countInitCards,
-  postMovie,
-  removeMovie,
-  savedMovies,
-  setVisibilityMoviesList,
-  visibilityBtnYet,
-  setVisibilityBtnYet,
-}) {
-  const { pathname } = useLocation();
-  const [visibilityNotFound, setVisibilityNotFound] = useState("");
+function MoviesCardList(props) {
+  const [initialCardsNumber, setInitialCardsNumber] = React.useState(() => {
+      const windowSize = window.innerWidth;
+      if(windowSize < 720) {
+          return 5
+      } else if(windowSize < 920) {
+          return 8
+      } else if(windowSize < 1279) {
+          return 12 }
+      else if(windowSize > 1279) {
+          return 12
+      }
+  } );
+  const [moreCardsNumber, setMoreCardsNumber] = React.useState(() => {
+      const windowSize = window.innerWidth;
+      if(windowSize < 720) {
+          return 2;
+      } else if(windowSize < 920) {
+          return 2
+      } else if(windowSize < 1279) {
+          return 3
+      } else if(windowSize > 1279) {
+          return 4
+      }
+  });
+
+  function handleScreenWidth () {
+      const windowSize = window.innerWidth;
+      if(windowSize < 720) {
+          setInitialCardsNumber(5)
+      } else if(windowSize < 920) {
+          setInitialCardsNumber(8)
+      } else if(windowSize < 1279) {
+          setInitialCardsNumber(12)
+      } else if(windowSize > 1279) {
+          setInitialCardsNumber(12)
+      }
+  }
+
+  const displayedMovies = props.movies?.slice(0, initialCardsNumber);
+
+  function handleMoviesIncrease() {
+      setInitialCardsNumber(prevState => {return prevState + moreCardsNumber});
+  }
 
   React.useEffect(() => {
-    const cards = countInitCards();
-
-    if (pathname === "/saved-movies") {
-      setVisibilityBtnYet("movies__more-button_invisible");
-      setVisibilityNotFound("movies__not-found_invisible");
-    } else {
-      setVisibilityNotFound("");
-    }
-
-    if (
-      localStorage.getItem("foundFilms") &&
-      JSON.parse(localStorage.getItem("foundFilms")).length > 0
-    ) {
-      setVisibilityMoviesList("movies_visibility");
-    }
-
-    if (localStorage.getItem("foundFilms")) {
-      setRenderedFilms(
-        JSON.parse(localStorage.getItem("foundFilms")).slice(0, cards)
-      );
-    }
-  }, [movies, setRenderedFilms, pathname, countInitCards, setVisibilityBtnYet]);
-
+      window.addEventListener('resize', handleScreenWidth);
+  }, []);
   return (
-      <section className={`movies__card-list ${visibilityMoviesList}`}>
-        {pathname === "/movies" ? (
-        renderedFilms.length > 0 ? (
-          ""
-        ) : (
-          <p className={`movies__not-found ${visibilityNotFound}`}>
-            Ничего не найдено
-          </p>
-        )
-      ) : savedMovies.length > 0 ? (
-        ""
-      ) : (
-        <p className={`movies__not-found ${visibilityNotFound}`}>
-          Ничего не найдено
-        </p>
-      )}
-        <ul className="movies__list">
-        {pathname === "/movies"
-          ? renderedFilms.map((movie) => (
-              <MoviesCard
-                movie={movie}
-                key={movie.id}
-                cardName={movie.nameRU}
-                cardDuration={movie.duration}
-                imageLink={
-                  movie.image
-                    ? `https://api.nomoreparties.co${movie.image.url}`
-                    : poster
+      <section className="movies__card-list">
+        {props.isLoading ? (
+          <Preloader />
+        ) : props.isErrorActive ? (
+          <span className="movies__error">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</span>
+        ) : props.notFound ? (
+            <span className="movies__not-found">Ничего не найдено</span>
+        ) : props.saved && props.movies.length === 0 ? (
+            <span className="movies__no-saved ">Вы пока что ничего не добавили в избранное</span>
+            ) : ("")}
+            <ul className="movies__list">
+
+                {displayedMovies?.map((movie) => {
+                        return (
+                            <MoviesCard movie={movie} key={props.saved ? movie.movieId : movie.id} saved={props.saved}
+                                        onMovieSave={props.onMovieSave} onDeleteMovie={props.onDeleteMovie}
+                                            savedMovies={props.savedMovies}/>
+                        )
+                    })
                 }
-                trailerLink={movie.trailerLink}
-                postMovie={postMovie}
-                removeMovie={removeMovie}
-                savedMovies={savedMovies}
-              />
-            ))
-          : savedMovies.map((movie) => (
-              <MoviesCard
-                movie={movie}
-                key={movie._id}
-                cardName={movie.nameRU}
-                cardDuration={movie.duration}
-                imageLink={
-                  movie.image
-                    ? movie.image
-                    : poster
-                }
-                trailerLink={movie.trailerLink}
-                postMovie={postMovie}
-                removeMovie={removeMovie}
-                savedMovies={savedMovies}
-              />
-            ))}
-      </ul>
-      {movies.length > renderedFilms.length || pathname !== "/saved-movies" ? (
-        <button
-          className={`movies__more-button ${visibilityBtnYet}`}
-          type="button"
-          onClick={handleMoreRenderFilms}
-        >
-          Ещё
-        </button>
-      ) : (
-        ""
-      )}
+            </ul>
+
+            <button className={props.saved ? 'movies__more-button movies__more-button_invisible' :
+                `movies__more-button ${props.movies?.length === displayedMovies?.length ? 'movies__more-button_invisible' : ''}`}
+              onClick={handleMoviesIncrease} >Еще</button>
       </section>
-  )
+  );
 }
 
 export default MoviesCardList;
