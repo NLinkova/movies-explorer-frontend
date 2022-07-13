@@ -42,25 +42,22 @@ function App() {
   const location = useLocation();
 
     //проверка токена и установка login true
-    function checkToken() {
-      const jwt = localStorage.getItem("jwt");
-      if (jwt) {
-        mainApi.getUserInfoFromServer(jwt)
-          .then((userInfo) => {
-            if (userInfo) {
-              setIsLogin(true);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        setIsLogin(false);
-      }
-    }
-
     useEffect(() => {
-      checkToken();
+        const jwt = localStorage.getItem("jwt");
+        if (jwt) {
+          mainApi.getUserInfoFromServer(jwt)
+            .then((userInfo) => {
+              if (userInfo) {
+                setIsLogin(true);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          setIsLogin(false);
+        }
+
     }, []);
 
       /*Обработчик регистрации*/
