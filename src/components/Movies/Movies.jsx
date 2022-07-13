@@ -8,7 +8,7 @@ function Movies(props) {
     <div className="movies">
       <div className="movies__container">
       <SearchForm onSearchMovies={props.onSearchMovies} onShortMoviesCheck={props.onShortMoviesCheck} saved={false}
-        isChecked={props.isShortMoviesChecked} setSearch={props.setSearch} />
+        isChecked={props.shorts} setSearch={props.setSearch} setShorts={props.setShorts}/>
       <MoviesCardList movies={props.movies} isLoading={props.isLoading} notFound={props.notFound}
         isErrorActive={props.isErrorActive} onMovieSave={props.onMovieSave}
         onDeleteMovie={props.onDeleteMovie} saved={false} savedMovies={props.savedMovies}

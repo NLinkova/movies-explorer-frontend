@@ -7,7 +7,7 @@ function FilterCheckbox(props) {
         <input
           type="checkbox"
           className="filter__input"
-          onChange={props.onChange} checked={props.isChecked}
+          onChange={props.onChange} checked={props.value}
         />
         <span className="filter__round" />
       </label>

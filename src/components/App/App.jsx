@@ -4,13 +4,10 @@ import {
   Routes,
   useNavigate,
   useLocation,
-  Navigate,
 } from 'react-router-dom';
 import './App.css';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
-
-import Preloader from '../Preloader/Preloader';
 import Header from '../Header/Header';
 import HeaderAuth from '../HeaderAuth/HeaderAuth';
 import Main from '../Main/Main';
@@ -18,7 +15,6 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
-
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
@@ -37,9 +33,7 @@ function App() {
   const [isEditDone, setIsEditDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
-  // const [isSearching, setIsSearching] = useState(false);
   const [notFound, setNotFound] = useState(false);
-  // const [search, setSearch] = useState('');
   const [isMoviesErrorActive, setIsMoviesErrorActive] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(localStorage.getItem('checkbox') === 'false')
@@ -129,7 +123,6 @@ function App() {
   //save checkbox status to LS
   function handleShortMoviesCheck(e) {
     setIsShortMoviesChecked(e.target.checked);
-    localStorage.setItem("checkbox", `${e.target.checked}`);
  }
 
 //  useEffect(() => {
@@ -138,15 +131,15 @@ function App() {
 
 //поиск фильмов
   function handleSearchMovies(movies, keyWord) {
+    // const shorts = localStorage.getItem('shorts');
     let filteredMovies = [];
     movies.forEach((movie) => {
       if(movie.nameRU.indexOf(keyWord) > -1) {
-        if(isShortMoviesChecked) {
-          if(movie.duration <= 40) {
-            return filteredMovies.push(movie);
-          }
-          return
-        }
+        // if(shorts === true) {
+        //   movies.filter((movie) =>
+        //     movie.duration <= 40);
+        //   return filteredMovies.push(movie);
+        // }
         return filteredMovies.push(movie);
       }
     })
@@ -175,7 +168,6 @@ function App() {
               setMovies([]);
             } else {
               localStorage.setItem('movies', JSON.stringify(searchResult))
-              localStorage.setItem('searchKeyword', JSON.stringify(keyWord))
               setMovies(JSON.parse(localStorage.getItem('movies')));
             }
           })
@@ -240,33 +232,12 @@ function App() {
     localStorage.removeItem("jwt");
     localStorage.removeItem('savedMovies');
     localStorage.removeItem('movies');
-    localStorage.removeItem('checkbox');
+    localStorage.removeItem('query');
+    localStorage.removeItem('shorts');
     setCurrentUser("");
     setIsLogin(false);
     navigate("/");
   }
-
-  //проверка токена и установка login true
-  function checkToken() {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      mainApi.getUserInfoFromServer(jwt)
-        .then((userInfo) => {
-          if (userInfo) {
-            setIsLogin(true);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      setIsLogin(false);
-    }
-  }
-
-  useEffect(() => {
-    checkToken();
-  }, []);
 
   //запрос инфо при успешном токене
   useEffect(() => {
@@ -314,6 +285,23 @@ function App() {
       })
     }, [location]);
 
+  //проверка short movie
+  useEffect(() => {
+    debugger
+    const shorts = localStorage.getItem('shorts');
+    if(shorts === true) {
+      setIsLoading(true);
+      if (pathname === '/movies') {
+        const newShortMovies = movies.filter((movie) => {return movie.duration <= 40})
+        setMovies(newShortMovies);
+      }
+      if (pathname === '/saved-movies') {
+        const newShortMovies = savedMovies.filter((movie) => {return movie.duration <= 40})
+        setSavedMovies(newShortMovies);
+      }
+      }
+  }, [movies, savedMovies]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -325,7 +313,7 @@ function App() {
             isLoading={isLoading} />}></Route>
           <Route exact path="/movies" element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth /> <Movies isLogin={isLogin} movies={movies} onSearchMovies={searchMovies}
             isLoading={isLoading} notFound={notFound} isErrorActive={isMoviesErrorActive} onMovieSave={handleSaveMovie}
-            onDeleteMovie={handleDeleteMovie} savedMovies={savedMovies} onShortMoviesCheck={handleShortMoviesCheck}
+            onDeleteMovie={handleDeleteMovie} savedMovies={savedMovies}
             isShortMoviesChecked={isShortMoviesChecked}  /><Footer /></ProtectedRoute>}></Route>
           <Route exact path="/saved-movies" element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth /><SavedMovies isLogin={isLogin} movies={savedMovies}
             onDeleteMovie={handleDeleteMovie} onSearchSavedMovies={searchSavedMovies} onShortMoviesCheck={handleShortMoviesCheck} isLoading={isLoading}

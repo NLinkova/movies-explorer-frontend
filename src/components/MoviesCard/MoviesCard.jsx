@@ -2,7 +2,6 @@ import './MoviesCard.css';
 import React, { useState, useEffect } from "react";
 import poster from "../../images/movies/default-movie.jpg"
 import { useLocation } from 'react-router-dom';
-import { CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 function MoviesCard(props) {
   const [isDeleteButtonVisible, setIsDeleteButtonVisible] = useState(false);
@@ -59,20 +58,7 @@ function MoviesCard(props) {
     }
   }, [currentMovie, location])
 
-  // useEffect(() => {
-  //   const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
-  //   if (savedMovies) {
-  //     savedMovies.forEach((savedMovie) => {
-  //       if (savedMovie.movieId === movie.id || savedMovie._id === movie._id) {
-  //         setIsSaved(true);
-  //       }
-  //     });
-  //   }
-  // }, []);
-
-
-
-  return (
+   return (
     <li className="movies__list-item">
       <a href={props.saved ? props.movie.trailer : props.movie.trailerLink}  className="movies__trailer-link" target="_blank"
             rel="noopener noreferrer">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import { Link } from 'react-router-dom';
 
 import logo from '../../images/logo.svg';
@@ -8,7 +8,7 @@ import './HeaderAuth.css';
 import Navigation from '../Navigation/Navigation';
 
 function HeaderAuth() {
-  const [activeBurger, setActiveBurger] = React.useState(false);
+  const [activeBurger, setActiveBurger] = useState(false);
 
   function handleActiveBurger() {
     setActiveBurger(!activeBurger);

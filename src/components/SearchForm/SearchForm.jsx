@@ -6,8 +6,14 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 function SearchForm(props) {
   const [search, setSearch] = useState('');
   const [isSearchValid, setIsSearchValid] = useState(true);
+  const [shorts, setShorts] = useState(false);
   const [placeholderContent, setPlaceholderContent] = useState('Фильм');
   const { pathname } = useLocation();
+
+  const handleCheckbox = () => {
+    setShorts(!shorts);
+    localStorage.setItem('shorts', !shorts);
+  };
 
   function handleSearchChange(e) {
     setSearch(e.target.value);
@@ -29,6 +35,7 @@ function SearchForm(props) {
 
   function handleSearchMovies(e) {
     e.preventDefault();
+
     if (!search) {
       setIsSearchValid(false);
       return;
@@ -41,19 +48,15 @@ function SearchForm(props) {
   useEffect(() => {
     if (pathname === '/movies') {
       const savedInputValue = localStorage.getItem('query');
-      // const savedShorts = JSON.parse(localStorage.getItem('shorts'));
+      const savedShorts = JSON.parse(localStorage.getItem('shorts'));
 
       if (savedInputValue) {
         setSearch(savedInputValue);
       }
 
-      // if (savedShorts) {
-      //   setShorts(savedShorts);
-      // }
-
-      // if (savedInputValue || (savedShorts === true)) {
-      //   handleSearch(savedInputValue, savedShorts);
-      // }
+      if (savedShorts) {
+        setShorts(savedShorts);
+      }
     }
   }, []);
 
@@ -82,7 +85,7 @@ function SearchForm(props) {
       </form>
       <div>
         <FilterCheckbox
-        onChange={props.onShortMoviesCheck} isChecked={props.isChecked}
+        onChange={handleCheckbox} isChecked={props.isChecked} value={shorts}
         />
       </div>
     </div>

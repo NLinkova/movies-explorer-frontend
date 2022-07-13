@@ -1,8 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useForm } from '../../utils/useForm';
-import Preloader from '../Preloader/Preloader';
-
 import './Profile.css';
 
 function Profile({
@@ -15,7 +13,7 @@ function Profile({
   const form = useForm();
   const { email, name } = form.values;
 
-  React.useEffect(() => {
+  useEffect(() => {
     form.setValues({
       email: currentUser.email,
       name: currentUser.name,
