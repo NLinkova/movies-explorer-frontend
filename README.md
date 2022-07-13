@@ -9,6 +9,6 @@
 
 ---
 
-* [Ссылка](https://linkova.mesto.front.nomoredomains.xyz) на фронтенд;
-* Запросы на бэкенд по [адресу](linkova.mesto.back.nomoredomains.xyz);
+* [Ссылка](https://linkova.movie.front.nomoredomains.xyz) на фронтенд;
+* Запросы на бэкенд по [адресу](https://linkova.movie.back.nomoredomains.xyz);
 * Публичный IP адрес сервера `130.193.53.189`.
