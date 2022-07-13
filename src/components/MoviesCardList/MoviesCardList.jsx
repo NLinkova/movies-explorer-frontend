@@ -50,7 +50,12 @@ function MoviesCardList(props) {
   }
 
   useEffect(() => {
-    window.addEventListener('resize', handleScreenWidth);
+    handleScreenWidth()
+    window.addEventListener('resize', () => {
+      setTimeout(() => {
+        handleScreenWidth();
+      }, 500);
+    });
   }, []);
 
   return (

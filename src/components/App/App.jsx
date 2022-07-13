@@ -93,14 +93,14 @@ function App() {
   //запрос movies при успешном токене
   useEffect(() => {
     setIsLoading(true);
-    // const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
+    const searchedMovies = JSON.parse(localStorage.getItem('movies'));
     if (isLogin) {
      mainApi.getUserMovies()
-        .then(movies => {
+        .then((movies) => {
           const films = [...savedMovies, movies];
             localStorage.setItem('savedMovies', JSON.stringify(films));
             setSavedMovies(prevState => ([...prevState, movies]));
-            // setMovies(searchedMovies);
+            setMovies(searchedMovies);
             setSavedMovies(movies)
         })
         .catch((err) => {
@@ -243,9 +243,9 @@ function App() {
               setNotFound(true);
               setMovies([]);
             } else {
-              localStorage.setItem('searchedMovies', JSON.stringify(searchResult))
+              localStorage.setItem('movies', JSON.stringify(searchResult))
               localStorage.setItem('searchKeyword', JSON.stringify(keyWord))
-              setMovies(JSON.parse(localStorage.getItem('searchedMovies')));
+              setMovies(JSON.parse(localStorage.getItem('movies')));
             }
           })
           .catch(() => {
@@ -264,8 +264,8 @@ function App() {
           setIsLoading(false);
           setIsShortMoviesChecked(false);
         } else if(searchResult.length !== 0) {
-          localStorage.setItem('searchedMovies', JSON.stringify(searchResult));
-          setMovies(JSON.parse(localStorage.getItem('searchedMovies')));
+          localStorage.setItem('movies', JSON.stringify(searchResult));
+          setMovies(JSON.parse(localStorage.getItem('movies')));
           setIsLoading(false);
           setIsShortMoviesChecked(false);
         } else {
@@ -293,10 +293,10 @@ function App() {
   function handleDeleteMovie(movieId) {
     mainApi.deleteMovie(movieId)
       .then(() => {
-        const newSavedMovies = savedMovies.filter((deletedMovie) => deletedMovie._id !== movieId)
+        const newSavedMovies = savedMovies.filter((deletedMovie) => {return deletedMovie._id !== movieId})
         setSavedMovies(newSavedMovies);
         localStorage.setItem('savedMovies', JSON.stringify(newSavedMovies));
-        setSavedMovies(prevState => ([...prevState, savedMovies]));
+        // setSavedMovies(prevState => ([...prevState, savedMovies]));
       })
       .catch((err) => {
         console.log(`Ошибка ${err}, попробуйте еще раз`);

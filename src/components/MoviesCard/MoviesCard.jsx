@@ -25,7 +25,7 @@ function MoviesCard(props) {
 
   const image = props.movie.image ? `https://api.nomoreparties.co${props.movie.image?.url}` : poster;
   const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
-  const currentMovie = savedMovies.find((movie) => movie.movieId  === props.movie.movieId );
+  const currentMovie = savedMovies.find((movie) => movie.nameRU === props.movie.nameRU );
 
   const location = useLocation();
 
