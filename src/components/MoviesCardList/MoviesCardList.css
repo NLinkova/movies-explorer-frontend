@@ -46,26 +46,46 @@
   cursor: pointer;
 }
 
-.movies__empty {
+/* .movies__empty {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 32px;
   color: #fff;
-}
+} */
 
 .movies__not-found {
-  font-family: Inter, sans-serif;
   font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 16px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
   text-align: center;
-  color: #000;
+  color: #fff;
+  margin: 20px auto;
 }
 
 .movies__not-found_invisible {
   display: none;
+}
+
+.movies__no-saved {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #fff;
+  margin: 20px auto;
+}
+
+.movies__error {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #fff;
+  margin: 20px auto;
 }
 
 @media(max-width: 1279px) {

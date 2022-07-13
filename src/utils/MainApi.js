@@ -69,25 +69,24 @@ register (name, email, password) {
     return fetch(`${this._baseUrl}/movies`, {
       headers: this._getHeaders(),
       method: 'POST',
-      body: JSON.stringify({
+      body: JSON.stringify(movie),
         country: movie.country,
         director: movie.director,
         duration: movie.duration,
         year: movie.year,
         description: movie.description,
-        image: `https://api.nomoreparties.co${movie.image.url}`,
-        trailer: movie.trailerLink,
-        movieId: movie.id.toString(),
+        image: movie.image,
+        trailerLink: movie.trailerLink,
+        movieId: movie.id,
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
-        thumbnail: `https://api.nomoreparties.co${movie.image.url}`,
-      }),
+        thumbnail: movie.thumbnail,
     }).then(this._checkResponse);
   }
 
   // Удаление на сервере фильма юзера
-  deleteMovie(id) {
-    return fetch(`${this._baseUrl}/movies/${id}`, {
+  deleteMovie(movieId) {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: "DELETE",
       headers: this._getHeaders(),
     }).then(this._checkResponse);

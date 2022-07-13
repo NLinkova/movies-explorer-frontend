@@ -3,24 +3,22 @@ import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
-  const [search, setSearch] = React.useState('');
-  const [isSearchValid, setIsSearchValid] = React.useState(true);
+  const [search, setSearch] = useState('');
+  const [isSearchValid, setIsSearchValid] = useState(true);
 
   function handleSearchChange(e) {
-      setSearch(e.target.value);
-      setIsSearchValid(e.target.checkValidity())
+    setSearch(e.target.value);
+    setIsSearchValid(e.target.checkValidity())
   }
 
   function handleSearchSavedMovies(e) {
-      e.preventDefault();
-
-      props.onSearchSavedMovies(search);
+    e.preventDefault();
+    props.onSearchSavedMovies(search);
   }
 
   function handleSearchMovies(e) {
-      e.preventDefault();
-
-      props.onSearchMovies(search);
+    e.preventDefault();
+    props.onSearchMovies(search);
   }
 
   return (
@@ -43,7 +41,7 @@ function SearchForm(props) {
           <button className='search__submit' type='submit'>Поиск</button>
         </fieldset>
         <div>
-          <span className="search__input-error">{!isSearchValid && 'Нужно ввести ключевое слово'}</span>
+          <span className={`search__input-error ${isSearchValid ? 'search__input-error_hidden' : ''}`}>Нужно ввести ключевое слово</span>
         </div>
       </form>
       <div>
