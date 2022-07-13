@@ -1,25 +1,61 @@
-import React, { useState }from 'react';
+import React, { useState, useEffect }from 'react';
+import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
   const [search, setSearch] = useState('');
   const [isSearchValid, setIsSearchValid] = useState(true);
+  const [placeholderContent, setPlaceholderContent] = useState('Фильм');
+  const { pathname } = useLocation();
 
   function handleSearchChange(e) {
     setSearch(e.target.value);
-    setIsSearchValid(e.target.checkValidity())
+    if (e.target.value) {
+      setIsSearchValid(true);
+    }
   }
 
   function handleSearchSavedMovies(e) {
     e.preventDefault();
+    if (!search) {
+      setIsSearchValid(false);
+      return;
+    }
+    setIsSearchValid(true);
+    setPlaceholderContent('Фильм');
     props.onSearchSavedMovies(search);
   }
 
   function handleSearchMovies(e) {
     e.preventDefault();
+    if (!search) {
+      setIsSearchValid(false);
+      return;
+    }
+    setIsSearchValid(true);
+    setPlaceholderContent('Фильм');
     props.onSearchMovies(search);
+    localStorage.setItem('query', search);
   }
+  useEffect(() => {
+    if (pathname === '/movies') {
+      const savedInputValue = localStorage.getItem('query');
+      // const savedShorts = JSON.parse(localStorage.getItem('shorts'));
+
+      if (savedInputValue) {
+        setSearch(savedInputValue);
+      }
+
+      // if (savedShorts) {
+      //   setShorts(savedShorts);
+      // }
+
+      // if (savedInputValue || (savedShorts === true)) {
+      //   handleSearch(savedInputValue, savedShorts);
+      // }
+    }
+  }, []);
 
   return (
     <div className='search'>
@@ -33,10 +69,10 @@ function SearchForm(props) {
           <input
             className='search__input'
             type='text'
-            placeholder='Фильм'
+            placeholder={placeholderContent}
             name="search"
             required
-            value={search || ''} onChange={handleSearchChange}
+            value={search} onChange={handleSearchChange}
           />
           <button className='search__submit' type='submit'>Поиск</button>
         </fieldset>

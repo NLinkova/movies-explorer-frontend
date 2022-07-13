@@ -22,7 +22,6 @@ function MoviesCard(props) {
     movieId: props.movie.id,
   }
 
-
   const image = props.movie.image ? `https://api.nomoreparties.co${props.movie.image?.url}` : poster;
   const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
   const currentMovie = savedMovies.find((movie) => movie.nameRU === props.movie.nameRU );
@@ -57,10 +56,20 @@ function MoviesCard(props) {
   useEffect(() => {
     if(currentMovie) {
       setIsSaved(true)
-    } else {
-      setIsSaved(false)
     }
   }, [currentMovie, location])
+
+  // useEffect(() => {
+  //   const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+  //   if (savedMovies) {
+  //     savedMovies.forEach((savedMovie) => {
+  //       if (savedMovie.movieId === movie.id || savedMovie._id === movie._id) {
+  //         setIsSaved(true);
+  //       }
+  //     });
+  //   }
+  // }, []);
+
 
 
   return (

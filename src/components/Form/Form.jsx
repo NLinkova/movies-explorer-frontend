@@ -4,6 +4,7 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../utils/useForm';
 import './Form.css';
+import Preloader from '../Preloader/Preloader';
 
 const Form = memo(
   ({
@@ -12,12 +13,14 @@ const Form = memo(
     onSubmit,
     isLoading,
     btnName,
-    textError,
     registeredError,
     loginError
   }) => {
     const form = useForm();
 
+    if (isLoading) {
+      return <Preloader />;
+    }
     return (
       <form
         className="form"
