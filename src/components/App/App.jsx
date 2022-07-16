@@ -284,7 +284,6 @@ function App() {
 
   //проверка short movie
   useEffect(() => {
-    debugger
     const shorts = localStorage.getItem('shorts');
     if(shorts === true) {
       setIsLoading(true);
@@ -303,7 +302,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Routes>
-          <Route exact path="/" element={<><Header /><Main isLogin={false} /><Footer /></>}></Route>
+          <Route exact path="/" element={<>{isLogin ? <HeaderAuth/> : <Header />} <Main isLogin={isLogin} /><Footer /></>}></Route>
           <Route exact path="/signin" element={<Login authLogin={handleAuthLogin}
             isLoading={isLoading}/>}></Route>
           <Route exact path="/signup" element={<Register authRegister={handleAuthRegister}
