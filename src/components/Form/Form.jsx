@@ -11,10 +11,8 @@ const Form = memo(
     name,
     title,
     onSubmit,
-    isLoading,
     btnName,
-    loginError,
-    registeredError
+    textError
   }) => {
     const form = useForm();
 
@@ -85,13 +83,12 @@ const Form = memo(
             onChange={form.handleChange}
           />
           <span className="form__error">{`${
-            form.errors.password ? form.errors.password : ''}`}</span>
-          {registeredError && (
-          <p className="form__error">Данный email уже зарегистрирован</p>
-          )}
-          {loginError && (
-          <p className="form__error">Неправильные почта или пароль. Попробуйте еще раз</p>
-          )}
+            form.errors.password ? form.errors.password : ''}`}
+          </span>
+          {textError
+            ? <span className="form__error">{textError}</span>
+            : ('')
+          }
           <button
             type="submit"
             className={`form__btn ${!form.isValid && 'form__btn_disabled'} ${name === 'sign-in' && 'form__btn_login'}`}

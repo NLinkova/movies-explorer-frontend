@@ -3,7 +3,7 @@ import './Register.css';
 import Form from '../Form/Form';
 import Preloader from '../Preloader/Preloader';
 
-const Register = memo(({ authRegister, setRegisteredError, registeredError, isLoading }) => {
+const Register = memo(({ authRegister, textError, setTextError }) => {
   function handleSubmit(e, { name, email, password }) {
     e.preventDefault();
     authRegister(name, email, password);
@@ -16,8 +16,8 @@ const Register = memo(({ authRegister, setRegisteredError, registeredError, isLo
         title="Добро пожаловать!"
         btnName="Зарегистрироваться"
         onSubmit={handleSubmit}
-        registeredError={registeredError}
-        setRegisteredError={setRegisteredError}
+        textError={textError}
+        setTextError={setTextError}
       />
     </section>
   );

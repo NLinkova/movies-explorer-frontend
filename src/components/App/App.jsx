@@ -7,7 +7,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import './App.css';
-import moviesApi from '../../utils/MoviesApi';
+
 import mainApi from '../../utils/MainApi';
 import Header from '../Header/Header';
 import HeaderAuth from '../HeaderAuth/HeaderAuth';
@@ -27,18 +27,13 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
   const [currentUser, setCurrentUser] = useState({});
   const [isLogin, setIsLogin] = useState(false);
-  const [loginError, setLoginError] = useState(false);
-  const [registeredError, setRegisteredError] = useState(false);
+  const [textError, setTextError] = useState('');
   const [isEditError, setIsEditError] = useState(false);
   const [isEditDone, setIsEditDone] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [tooltipMessage, setTooltipMessage] = useState('');
   const loggedIn = localStorage.getItem("jwt") || false;
-  const location = useLocation();
-
 
   const tooltipContext = useMemo(() => ({ tooltipMessage, setTooltipMessage }), [tooltipMessage]);
 
@@ -64,7 +59,6 @@ function App() {
 
   /*Обработчик регистрации*/
   function handleAuthRegister(name, email, password) {
-    setIsLoading(true);
     mainApi
       .register(name, email, password)
       .then((data) => {
@@ -74,20 +68,19 @@ function App() {
       })
       .catch((err) => {
         if (err.status === CONFLICT_ERROR_CODE) {
-          setRegisteredError(true);
+          setTextError('Данный email уже зарегистрирован');
         } else {
           console.log(err)
+          setTextError('Нет соединения с сервером');
         }
       })
       .finally(() => {
-        setIsLoading(false);
-        setRegisteredError(false);
+        setTextError('');
       });
   }
 
   /*Обработчик логина*/
   function handleAuthLogin(email, password) {
-    setIsLoading(true);
     mainApi
       .authorize(email, password)
       .then(jwt => {
@@ -97,22 +90,21 @@ function App() {
           navigate("/movies")
       }})
       .catch((err) => {
-        if (err.status === UNAUTH_ERROR_CODE) {
-          setLoginError(true);
+        if (err.status=== UNAUTH_ERROR_CODE) {
+          setTextError("Неправильные почта или пароль");
         } else {
           console.log(err)
-          setLoginError(true);
+          setTextError('Нет соединения с сервером');
         }
+        console.log(err)
       })
       .finally(() => {
-        setIsLoading(false);
-        setLoginError(false);
+        setTextError('')
       });
   }
 
   // Обработчик кнопки Редактировать на странице профиля
   function editProfile(name, email) {
-    setIsLoading(true);
     mainApi
       .saveUserInfoToServer(name, email)
       .then((userData) => {
@@ -124,7 +116,7 @@ function App() {
         setIsEditError(true);
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsEditError(false);
       });
   }
 
@@ -139,7 +131,6 @@ function App() {
 
   //запрос инфо при успешном токене
   useEffect(() => {
-    setIsLoading(true);
     if (isLogin) {
       mainApi.getUserInfoFromServer()
         .then(user => {
@@ -148,9 +139,6 @@ function App() {
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {
-          setIsLoading(false);
-        });
     }
   }, [isLogin]);
 
@@ -160,19 +148,27 @@ function App() {
           <InfoTooltip message={tooltipMessage} />
       <div className="page">
         <Routes>
-          <Route exact path="/" element={<>{isLogin ? <HeaderAuth/> : <Header />} <Main isLogin={isLogin} /><Footer /></>}></Route>
-          <Route exact path="/signin" element={loggedIn ? <Navigate to="/" /> : <Login authLogin={handleAuthLogin} loginError={loginError}
-            isLoading={isLoading}/>}></Route>
-          <Route exact path="/signup" element={loggedIn ? <Navigate to="/" /> :<Register authRegister={handleAuthRegister} registeredError={registeredError} setRegisteredError={setRegisteredError}
-            isLoading={isLoading}/>}></Route>
-          <Route exact path="/movies" element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth /> <Movies isLogin={isLogin} /><Footer /></ProtectedRoute>}></Route>
-          <Route exact path="/saved-movies" element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth /><SavedMovies isLogin={isLogin}/><Footer /></ProtectedRoute>}></Route>
-          <Route
-            exact
-            path="/profile"
-            element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth /> <Profile isLogin={isLogin} handleLogout={handleLogout}
+          <Route exact path="/" element={<>{isLogin ? <HeaderAuth/> : <Header />}
+            <Main isLogin={isLogin} />
+            <Footer /></>}>
+          </Route>
+          <Route exact path="/signin" element={loggedIn ? <Navigate to="/" />
+            : <Login authLogin={handleAuthLogin} textError={textError} setTextError={setTextError} />}>
+          </Route>
+          <Route exact path="/signup" element={loggedIn ? <Navigate to="/" />
+            : <Register authRegister={handleAuthRegister} textError={textError} setTextError={setTextError} />}>
+          </Route>
+          <Route exact path="/movies" element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth />
+            <Movies isLogin={isLogin} /><Footer /></ProtectedRoute>}>
+          </Route>
+          <Route exact path="/saved-movies" element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth />
+            <SavedMovies isLogin={isLogin}/><Footer /></ProtectedRoute>}>
+          </Route>
+          <Route exact path="/profile" element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth />
+            <Profile isLogin={isLogin} handleLogout={handleLogout}
             editProfile={editProfile} currentUser={currentUser} isEditError={isEditError} isEditDone={isEditDone}/>
-            </ProtectedRoute>}></Route>
+            </ProtectedRoute>}>
+          </Route>
           <Route exact path="*" element={<NotFoundPage />}></Route>
         </Routes>
       </div>

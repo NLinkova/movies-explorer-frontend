@@ -3,7 +3,7 @@ import './Login.css';
 import Form from '../Form/Form';
 import Preloader from '../Preloader/Preloader';
 
-const Login = memo(({ authLogin, loginError, isLoading }) => {
+const Login = memo(({ authLogin, textError, setTextError }) => {
   function handleSubmit(e, { email, password }) {
     e.preventDefault();
     if (!email || !password) {
@@ -18,7 +18,8 @@ const Login = memo(({ authLogin, loginError, isLoading }) => {
         title="Рады видеть!"
         btnName="Войти"
         onSubmit={handleSubmit}
-        loginError={loginError}
+        textError={textError}
+        setTextError={setTextError}
       />
     </section>
   );
