@@ -4,7 +4,7 @@ import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../utils/useForm';
 import './Form.css';
-import Preloader from '../Preloader/Preloader';
+
 
 const Form = memo(
   ({
@@ -13,14 +13,11 @@ const Form = memo(
     onSubmit,
     isLoading,
     btnName,
-    registeredError,
-    loginError
+    loginError,
+    registeredError
   }) => {
     const form = useForm();
 
-    if (isLoading) {
-      return <Preloader />;
-    }
     return (
       <form
         className="form"
@@ -75,12 +72,6 @@ const Form = memo(
           <span className="form__error">{`${
             form.errors.email ? form.errors.email : ''
           }`}</span>
-           {registeredError && (
-        <p className="form__error">Произошла ошибка при регистрации. Попробуйте еще раз</p>
-      )}
-            {loginError && (
-        <p className="form__error">Произошла ошибка при попытке войти. Попробуйте еще раз</p>
-      )}
           <label className="form__field" htmlFor="form-password-">
             Пароль
           </label>
@@ -94,14 +85,13 @@ const Form = memo(
             onChange={form.handleChange}
           />
           <span className="form__error">{`${
-            form.errors.password ? form.errors.password : ''
-          }`}</span>
-           {registeredError && (
-        <p className="form__error">Произошла ошибка при регистрации. Попробуйте еще раз</p>
-      )}
-            {loginError && (
-        <p className="form__error">Произошла ошибка при попытке войти. Попробуйте еще раз</p>
-      )}
+            form.errors.password ? form.errors.password : ''}`}</span>
+          {registeredError && (
+          <p className="form__error">Данный email уже зарегистрирован</p>
+          )}
+          {loginError && (
+          <p className="form__error">Неправильные почта или пароль. Попробуйте еще раз</p>
+          )}
           <button
             type="submit"
             className={`form__btn ${!form.isValid && 'form__btn_disabled'} ${name === 'sign-in' && 'form__btn_login'}`}

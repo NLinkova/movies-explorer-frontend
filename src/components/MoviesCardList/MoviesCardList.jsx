@@ -1,86 +1,83 @@
 import './MoviesCardList.css';
 import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import MoviesCard from "../MoviesCard/MoviesCard";
-import Preloader from '../Preloader/Preloader';
+import {
+  MAX_MOVIES_1280,
+  MAX_MOVIES_768,
+  MAX_MOVIES_1000,
+  MAX_MOVIES_DEFAULT,
+  MAX_MOVIES_STEP_1280,
+  MAX_MOVIES_STEP_1000,
+  MAX_MOVIES_STEP_DEFAULT,
+} from '../../constants/constants';
 
-function MoviesCardList(props) {
-  const [initialCardsNumber, setInitialCardsNumber] = useState(() => {
-    const windowSize = window.innerWidth;
-    if(windowSize < 480) {
-      return 5
-    } else if(windowSize < 768) {
-      return 8
-    } else if(windowSize < 1279) {
-      return 12
-    } else if(windowSize > 1279) {
-      return 12
+function MoviesCardList({ movies, errorMessage }) {
+  const [maxMovies, setMaxMovies] = useState(0);
+  const [step, setStep] = useState(0);
+  const location = useLocation();
+
+  const showMoreMovies = () => {
+    setMaxMovies(maxMovies + step);
+  };
+
+  const setCardsTemplate = () => {
+    const width = window.innerWidth;
+    if (location.pathname === '/saved-movies') {
+      setMaxMovies(movies.length);
     }
-  });
 
-  const [moreCardsNumber, setMoreCardsNumber] = useState(() => {
-    const windowSize = window.innerWidth;
-    if(windowSize < 480) {
-      return 2;
-    } else if(windowSize < 768) {
-      return 2
-    } else if(windowSize < 1279) {
-      return 3
-    } else if(windowSize > 1279) {
-      return 4
+    if (width <= 720) {
+    setMaxMovies(MAX_MOVIES_DEFAULT);
+    setStep(MAX_MOVIES_STEP_DEFAULT);
     }
-  });
-
-  function handleScreenWidth () {
-    const windowSize = window.innerWidth;
-    if(windowSize < 480) {
-      setInitialCardsNumber(5)
-    } else if(windowSize < 768) {
-      setInitialCardsNumber(8)
-    } else if(windowSize < 1279) {
-      setInitialCardsNumber(12)
-    } else if(windowSize > 1279) {
-      setInitialCardsNumber(12)
+    else if (width <= 1000) {
+    setMaxMovies(MAX_MOVIES_768);
+    setStep(MAX_MOVIES_STEP_DEFAULT);
     }
-  }
-
-  const displayedMovies = props.movies?.slice(0, initialCardsNumber);
-
-  function handleMoviesIncrease() {
-    setInitialCardsNumber(prevState => {return prevState + moreCardsNumber});
-  }
+    else if (width <= 1279) {
+    setMaxMovies(MAX_MOVIES_1280);
+    setStep(MAX_MOVIES_STEP_1000);
+    }
+    else {
+      setMaxMovies(MAX_MOVIES_1280);
+      setStep(MAX_MOVIES_STEP_1280);
+    }
+  };
 
   useEffect(() => {
-    handleScreenWidth()
+    setCardsTemplate();
     window.addEventListener('resize', () => {
       setTimeout(() => {
-        handleScreenWidth();
+        setCardsTemplate();
       }, 500);
     });
   }, []);
 
   return (
     <section className="movies__card-list">
-      {props.isLoading ? (
-        <Preloader />
-      ) : props.isErrorActive ? (
-        <span className="movies__error">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</span>
-      ) : props.notFound ? (
-          <span className="movies__not-found">Ничего не найдено</span>
-      ) : props.saved && props.movies.length === 0 ? (
-          <span className="movies__no-saved ">Вы пока что ничего не добавили в избранное</span>
-      ) : ("")}
+      {errorMessage
+        ? <span className="movies__error">{errorMessage}</span>
+        : (
       <ul className="movies__list">
-        {displayedMovies?.map(movie => {
-          return (
-            <MoviesCard movie={movie} key={props.saved ? movie.movieId : movie.id} saved={props.saved}
-            onMovieSave={props.onMovieSave} onDeleteMovie={props.onDeleteMovie} savedMovies={props.savedMovies}/>
-          )})
-        }
+        {movies.map((movie, index) => {
+              if (index < maxMovies) {
+                return (
+                  <MoviesCard
+                    key={movie.id || movie.movieId}
+                    movie={movie}
+                  />
+                );
+              }
+              return null;
+            })}
       </ul>
-      <button className={props.saved ? 'movies__more-button movies__more-button_invisible' :
-        `movies__more-button ${props.movies?.length === displayedMovies?.length ? 'movies__more-button_invisible' : ''}`}
-        onClick={handleMoviesIncrease}>Еще
+      )}
+      {movies.length > maxMovies && location.pathname !== '/saved-movies' && (
+      <button className='movies__more-button'
+        onClick={showMoreMovies}>Еще
       </button>
+      )}
     </section>
   );
 }

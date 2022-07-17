@@ -1,0 +1,29 @@
+.info-tooltip {
+  visibility: hidden;
+  position: fixed;
+  top: 72px;
+  left: 5%;
+  width: 90%;
+  background-color: rgba(0, 0, 0, 0.5);
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  border-radius: 12px;
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.info-tooltip__text {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  margin: 0;
+  text-align: center;
+  color: white;
+}
+
+.info-tooltip_opened {
+  visibility: visible;
+  opacity: 100%;
+}

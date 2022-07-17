@@ -1,61 +1,53 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm(props) {
-  const [search, setSearch] = useState('');
-  const [isSearchValid, setIsSearchValid] = useState(true);
+function SearchForm({ handleSearch }) {
+  const [inputValue, setInputValue] = useState('');
   const [shorts, setShorts] = useState(false);
+
   const [placeholderContent, setPlaceholderContent] = useState('Фильм');
+  const [error, setError] = useState(false);
   const { pathname } = useLocation();
+
+  const handleInput = (evt) => {
+    setInputValue(evt.target.value);
+  };
 
   const handleCheckbox = () => {
     setShorts(!shorts);
+    handleSearch(inputValue, !shorts);
+    if (pathname === '/movies') {
     localStorage.setItem('shorts', !shorts);
+    }
   };
 
-  function handleSearchChange(e) {
-    setSearch(e.target.value);
-    if (e.target.value) {
-      setIsSearchValid(true);
-    }
-  }
-
-  function handleSearchSavedMovies(e) {
-    e.preventDefault();
-    if (!search) {
-      setIsSearchValid(false);
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    if (!inputValue) {
+      setError(true);
+      evt.target.elements['search-query'].focus();
       return;
     }
-    setIsSearchValid(true);
+    setError(false);
     setPlaceholderContent('Фильм');
-    props.onSearchSavedMovies(search);
-  }
+    localStorage.setItem('query', inputValue);
+    handleSearch(inputValue, shorts);
+  };
 
-  function handleSearchMovies(e) {
-    e.preventDefault();
-
-    if (!search) {
-      setIsSearchValid(false);
-      return;
-    }
-    setIsSearchValid(true);
-    setPlaceholderContent('Фильм');
-    props.onSearchMovies(search);
-    localStorage.setItem('query', search);
-  }
   useEffect(() => {
     if (pathname === '/movies') {
       const savedInputValue = localStorage.getItem('query');
       const savedShorts = JSON.parse(localStorage.getItem('shorts'));
-
       if (savedInputValue) {
-        setSearch(savedInputValue);
+        setInputValue(savedInputValue);
       }
-
       if (savedShorts) {
         setShorts(savedShorts);
+      }
+      if (savedInputValue || (savedShorts === true)) {
+        handleSearch(savedInputValue, savedShorts);
       }
     }
   }, []);
@@ -66,26 +58,29 @@ function SearchForm(props) {
         className='search__form'
         noValidate
         autoComplete='off'
-        onSubmit={props.saved ? handleSearchSavedMovies : handleSearchMovies}
+        onSubmit={handleSubmit}
       >
         <fieldset className='search__field'>
           <input
             className='search__input'
             type='text'
-            placeholder={placeholderContent}
-            name="search"
+            id="search-query"
+            name="search-query"
             required
-            value={search} onChange={handleSearchChange}
+            placeholder={placeholderContent}
+            onChange={handleInput}
+            value={inputValue}
           />
           <button className='search__submit' type='submit'>Поиск</button>
         </fieldset>
         <div>
-          <span className={`search__input-error ${isSearchValid ? 'search__input-error_hidden' : ''}`}>Нужно ввести ключевое слово</span>
+          <span className={`search__input-error ${!error ? 'search__input-error_hidden' : ''}`}>Нужно ввести ключевое слово</span>
         </div>
       </form>
       <div>
         <FilterCheckbox
-        onChange={handleCheckbox} isChecked={props.isChecked} value={shorts}
+          value={shorts}
+          onChange={handleCheckbox}
         />
       </div>
     </div>

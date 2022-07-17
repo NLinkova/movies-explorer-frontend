@@ -4,6 +4,8 @@
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   object-fit: contain;
   background-color: #202020;
+  align-self: center;
+  margin: 0 auto;
 }
 
 .movies__list-poster:hover {
@@ -17,7 +19,9 @@
 .movies__list-description {
   display: flex;
   justify-content: space-between;
-  margin: 14px 0 25px 0;
+  margin: 14px 0 13px 0;
+  max-width: 270px;
+  height: 32px;
 }
 
 .movies__list-title {
@@ -36,7 +40,7 @@
   height: 24px;
   border-radius: 36px;
   outline: none;
-  padding: 0;
+  /* padding: 0; */
   transition: border-color 0.3s;
 }
 
@@ -84,6 +88,10 @@
   .movies__list-poster {
     width: 339px;
     height: 190px;
+  }
+
+  .movies__list-description {
+    max-width: 339px;
   }
 }
 

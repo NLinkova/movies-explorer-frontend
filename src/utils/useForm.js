@@ -15,16 +15,14 @@ export function useForm() {
     const { target } = event;
     const { name } = target;
     const { value } = target;
-    const error = validation(name, value);
-    setErrors(validation(name, value));
     setValues({ ...values, [name]: value });
-    if (Object.keys(error).length === 0) {
-      setIsValid(target.closest("form").checkValidity());
-    }
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest('form').checkValidity());
   };
 
   const resetForm = React.useCallback(
-    (newErrors = {}, newIsValid = false) => {
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
@@ -32,13 +30,6 @@ export function useForm() {
   );
 
   return {
-    values,
-    handleChange,
-    errors,
-    isValid,
-    resetForm,
-    onFocus,
-    isFocused,
-    setValues,
+    values, setValues, handleChange, errors, isValid, resetForm, onFocus, isFocused
   };
 }

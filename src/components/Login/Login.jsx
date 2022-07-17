@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 import './Login.css';
 import Form from '../Form/Form';
+import Preloader from '../Preloader/Preloader';
 
-const Login = memo(({ authLogin, textError, clearTextError }) => {
+const Login = memo(({ authLogin, loginError, isLoading }) => {
   function handleSubmit(e, { email, password }) {
     e.preventDefault();
     if (!email || !password) {
@@ -17,8 +18,7 @@ const Login = memo(({ authLogin, textError, clearTextError }) => {
         title="Рады видеть!"
         btnName="Войти"
         onSubmit={handleSubmit}
-        textError={textError}
-        clearTextError={clearTextError}
+        loginError={loginError}
       />
     </section>
   );

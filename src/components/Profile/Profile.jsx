@@ -1,5 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import './Profile.css';
+import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import TooltipContext from '../../contexts/TooltipContext';
 import { useForm } from '../../utils/useForm';
 import './Profile.css';
 
@@ -9,6 +12,7 @@ function Profile({
   isEditError,
   isEditDone,}) {
   const currentUser = useContext(CurrentUserContext);
+  const [disabled, setDisabled] = useState(true);
 
   const form = useForm();
   const { email, name } = form.values;
@@ -24,6 +28,16 @@ function Profile({
     event.preventDefault();
     editProfile(name, email);
   };
+
+  useEffect(() => {
+    const { name, email } = form.values;
+    if (form.isValid && (currentUser.name !== name || currentUser.email !== email)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [form.values, currentUser]);
+
     return (
       <section className="profile">
         <div className="profile__container">
@@ -69,10 +83,8 @@ function Profile({
           )}
             <button
               type="submit"
-              className={`profile__btn ${
-                !form.isValid && 'profile__btn_disabled'
-              }`}
-              disabled={!form.isValid}
+              className={`profile__btn ${disabled && 'profile__btn_disabled'}`}
+              disabled={disabled}
             >
               Редактировать
             </button>

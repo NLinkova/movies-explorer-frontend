@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 import './Register.css';
 import Form from '../Form/Form';
+import Preloader from '../Preloader/Preloader';
 
-const Register = memo(({ authRegister, textError, clearTextError }) => {
+const Register = memo(({ authRegister, setRegisteredError, registeredError, isLoading }) => {
   function handleSubmit(e, { name, email, password }) {
     e.preventDefault();
     authRegister(name, email, password);
@@ -15,8 +16,8 @@ const Register = memo(({ authRegister, textError, clearTextError }) => {
         title="Добро пожаловать!"
         btnName="Зарегистрироваться"
         onSubmit={handleSubmit}
-        textError={textError}
-        clearTextError={clearTextError}
+        registeredError={registeredError}
+        setRegisteredError={setRegisteredError}
       />
     </section>
   );

@@ -1,13 +1,15 @@
 import './FilterCheckbox.css';
+import React from 'react';
 
-function FilterCheckbox(props) {
+function FilterCheckbox({ value, onChange }) {
   return (
-    <div className="filter">
+    <div className="filter" htmlFor="shorts">
       <label className="filter__checkbox">
         <input
           type="checkbox"
           className="filter__input"
-          onChange={props.onChange} checked={props.value}
+          checked={value}
+          onChange={onChange}
         />
         <span className="filter__round" />
       </label>
