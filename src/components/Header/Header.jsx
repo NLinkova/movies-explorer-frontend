@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
-
+import React, { useContext, useEffect } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import logo from '../../images/logo.svg';
 import './Header.css';
+import HeaderAuth from '../HeaderAuth/HeaderAuth';
 
 function Header () {
+  const currentUser = useContext(CurrentUserContext);
   return (
+
     <header className="header">
+
       <div className="header__container">
         <Link to="/" className="header__link">
           <img className="header__logo" alt="Логотип" src={logo}></img>
@@ -30,6 +35,7 @@ function Header () {
            </li>
         </ul>
       </div>
+
     </header>
   );
 }

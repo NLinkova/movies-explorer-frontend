@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import { useForm } from '../../utils/useForm';
 import './Form.css';
 
+
 const Form = memo(
   ({
     name,
     title,
     onSubmit,
-    isLoading,
     btnName,
-    textError,
+    textError
   }) => {
     const form = useForm();
 
@@ -83,15 +83,12 @@ const Form = memo(
             onChange={form.handleChange}
           />
           <span className="form__error">{`${
-            form.errors.password ? form.errors.password : ''
-          }`}</span>
-          {/* <span
-            className={`form__text-error ${
-              textError && 'form__text-error_visible'
-            }`}
-          >
-            {textError && textError}
-          </span> */}
+            form.errors.password ? form.errors.password : ''}`}
+          </span>
+          {textError
+            ? <span className="form__error">{textError}</span>
+            : ('')
+          }
           <button
             type="submit"
             className={`form__btn ${!form.isValid && 'form__btn_disabled'} ${name === 'sign-in' && 'form__btn_login'}`}
@@ -102,7 +99,7 @@ const Form = memo(
           {name === 'sign-up' && (
             <p className="form__text">
               Уже зарегистрированы?{' '}
-              <Link to="/sign-in" className="form__link">
+              <Link to="/signin" className="form__link">
                 Войти
               </Link>
             </p>
@@ -110,7 +107,7 @@ const Form = memo(
           {name === 'sign-in' && (
             <p className="form__text">
               Еще не зарегистрированы?{' '}
-              <Link to="/sign-up" className="form__link">
+              <Link to="/signup" className="form__link">
                 Регистрация
               </Link>
             </p>

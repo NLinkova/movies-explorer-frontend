@@ -77,6 +77,16 @@
   margin: 6px 0;
 }
 
+.form__text-error {
+  display: block;
+  color: #EE3465;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  margin: 6px 0;
+  visibility: hidden;
+}
+
 .form__text-error_visible {
   visibility: visible;
 }

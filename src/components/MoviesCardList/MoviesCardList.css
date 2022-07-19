@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 17vh;
 }
 
 .movies__list {
@@ -43,6 +44,40 @@
 .movies__more-button:hover {
   border-color: #4285F4;
   cursor: pointer;
+}
+
+.movies__not-found {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #fff;
+  margin: 20px auto;
+}
+
+.movies__not-found_invisible {
+  display: none;
+}
+
+.movies__no-saved {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #fff;
+  margin: 20px auto;
+}
+
+.movies__error {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #fff;
+  margin: 20px auto;
 }
 
 @media(max-width: 1279px) {

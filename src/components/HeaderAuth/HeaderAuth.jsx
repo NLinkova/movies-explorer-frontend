@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import logo from '../../images/logo.svg';
@@ -8,13 +9,15 @@ import './HeaderAuth.css';
 import Navigation from '../Navigation/Navigation';
 
 function HeaderAuth() {
-  const [activeBurger, setActiveBurger] = React.useState(false);
+  const [activeBurger, setActiveBurger] = useState(false);
+  const { pathname } = useLocation();
 
   function handleActiveBurger() {
     setActiveBurger(!activeBurger);
   }
+
   return (
-    <header className="header-auth">
+    <header className={`header-auth ${pathname === '/' ? 'header-auth_main' : ''}`}>
       <div className="header-auth__container">
         <Link className="header-auth__link" to="/">
           <img className="header-auth__logo" src={logo} alt="Логотип" />

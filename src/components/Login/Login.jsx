@@ -1,13 +1,15 @@
 import React, { memo } from 'react';
 import './Login.css';
 import Form from '../Form/Form';
+import Preloader from '../Preloader/Preloader';
 
-const Login = memo(({ textError, clearTextError }) => {
+const Login = memo(({ authLogin, textError, setTextError }) => {
   function handleSubmit(e, { email, password }) {
     e.preventDefault();
     if (!email || !password) {
       return;
     }
+    authLogin(email, password);
   }
   return (
     <section className="login__page">
@@ -17,7 +19,7 @@ const Login = memo(({ textError, clearTextError }) => {
         btnName="Войти"
         onSubmit={handleSubmit}
         textError={textError}
-        clearTextError={clearTextError}
+        setTextError={setTextError}
       />
     </section>
   );

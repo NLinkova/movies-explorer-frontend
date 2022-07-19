@@ -11,6 +11,10 @@
   background-color: #202020;
 }
 
+.header-auth_main {
+  background-color: #073042;
+}
+
 .header-auth__container {
   display: flex;
   align-items: center;
