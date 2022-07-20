@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
-import './Register.css';
-import Form from '../Form/Form';
-import Preloader from '../Preloader/Preloader';
+import React, { memo } from "react";
+import "./Register.css";
+import Form from "../Form/Form";
+import Preloader from "../Preloader/Preloader";
 
 const Register = memo(({ authRegister, textError, setTextError }) => {
   function handleSubmit(e, { name, email, password }) {
@@ -10,11 +10,11 @@ const Register = memo(({ authRegister, textError, setTextError }) => {
   }
 
   return (
-    <section className='register__page'>
+    <section className="register__page">
       <Form
         name="sign-up"
-        title="Добро пожаловать!"
-        btnName="Зарегистрироваться"
+        title="Welcome!"
+        btnName="Sign up"
         onSubmit={handleSubmit}
         textError={textError}
         setTextError={setTextError}

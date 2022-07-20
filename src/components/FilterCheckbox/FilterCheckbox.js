@@ -1,5 +1,5 @@
-import './FilterCheckbox.css';
-import React from 'react';
+import "./FilterCheckbox.css";
+import React from "react";
 
 function FilterCheckbox({ value, onChange }) {
   return (
@@ -13,7 +13,7 @@ function FilterCheckbox({ value, onChange }) {
         />
         <span className="filter__round" />
       </label>
-      <p className="filter__title">Короткометражки</p>
+      <p className="filter__title">Short movies</p>
     </div>
   );
 }

@@ -1,12 +1,13 @@
-export const URL_BEATFILM = 'https://api.nomoreparties.co/beatfilm-movies';
-export const URL_MAIN = 'https://linkova.movie.back.nomoredomains.xyz';
-export const DEFAULT_MESSAGE = 'Упс! Что-то пошло не так...';
-export const NO_CONNECTION_MESSAGE = 'Нет соединения с сервером';
-export const NOT_FOUND_MESSAGE = 'Ничего не найдено';
-export const EMPTY_LIST_MESSAGE = 'Вы пока что ничего не добавили в избранное';
-export const MOVVIES_MESSAGE = `Во время запроса произошла ошибка.
-  Возможно, проблема с соединением или сервер недоступен.
-  Подождите немного и попробуйте ещё раз`;
+export const URL_BEATFILM = "https://api.nomoreparties.co/beatfilm-movies";
+export const URL_MAIN = "https://linkova.movie.back.nomoredomains.xyz";
+export const DEFAULT_MESSAGE = "Oops! Something went wrong...";
+export const NO_CONNECTION_MESSAGE = "No connection to server";
+export const NOT_FOUND_MESSAGE = "Nothing found";
+export const EMPTY_LIST_MESSAGE =
+  "You have not added anything to your favorites yet";
+export const MOVVIES_MESSAGE = `An error occurred during the request.
+There may be a connection problem or the server is unavailable.
+Wait a bit and try again`;
 
 export const MAX_SHORTS_DURATION = 40;
 

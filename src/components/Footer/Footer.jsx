@@ -4,22 +4,10 @@ import "./Footer.css";
 function Footer() {
   return (
     <footer className="footer">
-      <h2 className="footer__title">
-        Учебный проект Яндекс.Практикум х BeatFilm.
-      </h2>
+      <h2 className="footer__title">Yandex.Practicum х BeatFilm.</h2>
       <div className="footer__nav">
-        <span className="footer__copyright">&copy; 2022</span>
+        <span className="footer__copyright">&copy; 2022 Natalia Linkova</span>
         <ul className="footer__list">
-          <li>
-            <a
-              className="footer__link"
-              href="https://praktikum.yandex.ru/web/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Яндекс.Практикум
-            </a>
-          </li>
           <li>
             <a
               className="footer__link"
@@ -28,16 +16,6 @@ function Footer() {
               rel="noopener noreferrer"
             >
               Github
-            </a>
-          </li>
-          <li>
-            <a
-              className="footer__link"
-              href="https://www.facebook.com/nat.linkova"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Facebook
             </a>
           </li>
         </ul>
