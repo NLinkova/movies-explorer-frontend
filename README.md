@@ -1,14 +1,14 @@
-# Frontend дипломного проекта Movie Explorer
-Данный проект является финальной работойна Яндекс.Практикуме.
+# Frontend Movie Explorer
 
-## Описание
+Final project with Yandex.Practicum
 
-В нём представлены:
+## Description
 
-Фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с поиском фильмов на стороннем api, добавление их в избранное и обновление данных пользователя.
+It presents:
+
+Front-end and back-end parts of the application with the following features: authorization and registration of users, operations with searching for films on a third-party api, adding them to favorites and updating user data.
 
 ---
 
-* [Ссылка](https://linkova.movie.front.nomoredomains.xyz) на фронтенд;
-* Запросы на бэкенд по [адресу](https://linkova.movie.back.nomoredomains.xyz);
-* Публичный IP адрес сервера `130.193.53.189`.
+- [Link](https://linkova.movie.front.nomoredomains.xyz) to the frontend;
+- Backend requests at [address](https://linkova.movie.back.nomoredomains.xyz);
