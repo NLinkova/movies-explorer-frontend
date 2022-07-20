@@ -4,8 +4,8 @@ import www from "../../images/landing-logo.svg";
 
 function Promo() {
   const scroll = () => {
-    const section = document.getElementById('about');
-    section.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+    const section = document.getElementById("about");
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
@@ -13,13 +13,14 @@ function Promo() {
       <div className="promo__wrapper">
         <div className="promo__text-content">
           <h1 className="promo__title">
-            Учебный проект студента факультета
-             Веб&#8209;разработки.
+            Project of a student of the Faculty of Web Development.
           </h1>
           <h3 className="promo__subtitle">
-            Листайте ниже, чтобы узнать больше про этот проект и его создателя.
+            Scroll down to learn more about this project.
           </h3>
-          <button className="promo__learn-more" onClick={scroll}>Узнать больше</button>
+          <button className="promo__learn-more" onClick={scroll}>
+            Learn more
+          </button>
         </div>
         <img src={www} alt="картинка глобуса" className="promo__image" />
       </div>

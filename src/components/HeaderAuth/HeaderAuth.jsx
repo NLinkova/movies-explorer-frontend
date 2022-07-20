@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import logo from '../../images/logo.svg';
-import icon from '../../images/accountIcon.svg'
-import './HeaderAuth.css';
+import logo from "../../images/logo.svg";
+import icon from "../../images/accountIcon.svg";
+import "./HeaderAuth.css";
 
-import Navigation from '../Navigation/Navigation';
+import Navigation from "../Navigation/Navigation";
 
 function HeaderAuth() {
   const [activeBurger, setActiveBurger] = useState(false);
@@ -17,7 +17,9 @@ function HeaderAuth() {
   }
 
   return (
-    <header className={`header-auth ${pathname === '/' ? 'header-auth_main' : ''}`}>
+    <header
+      className={`header-auth ${pathname === "/" ? "header-auth_main" : ""}`}
+    >
       <div className="header-auth__container">
         <Link className="header-auth__link" to="/">
           <img className="header-auth__logo" src={logo} alt="Логотип" />
@@ -28,7 +30,7 @@ function HeaderAuth() {
       </div>
       <div className="header-auth__container">
         <Link to="/profile" className="header-auth__account">
-          <span className="header-auth__text">Аккаунт</span>
+          <span className="header-auth__text">Profile</span>
           <img className="header-auth__icon" alt="Аккаунт" src={icon}></img>
         </Link>
       </div>
@@ -53,30 +55,34 @@ function HeaderAuth() {
             <ul className="header-auth__burger-list">
               <li className="header-auth__burger-item">
                 <Link className="header-auth__burger-link" to="/">
-                  Главная
+                  Main
                 </Link>
               </li>
               <li className="header-auth__burger-item">
                 <Link className="header-auth__burger-link" to="/movies">
-                  Фильмы
+                  Movies
                 </Link>
               </li>
               <li className="header-auth__burger-item">
                 <Link className="header-auth__burger-link" to="/saved-movies">
-                  Сохранённые фильмы
+                  Saved movies
                 </Link>
               </li>
             </ul>
           </nav>
           <div className="header-auth__burger-account">
             <Link to="/profile" className="header-auth__burger-account-link">
-              <span className="header-auth__burger-text">Аккаунт</span>
-              <img className="header-auth__burger-icon" alt="Аккаунт" src={icon}></img>
+              <span className="header-auth__burger-text">Account</span>
+              <img
+                className="header-auth__burger-icon"
+                alt="Аккаунт"
+                src={icon}
+              ></img>
             </Link>
           </div>
         </div>
       </div>
     </header>
-);
+  );
 }
 export default HeaderAuth;

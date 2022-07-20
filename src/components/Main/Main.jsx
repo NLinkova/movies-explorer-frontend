@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import AboutMe from "../AboutMe/AboutMe";
 import AboutProject from "../AboutProject/AboutProject";
 import Portfolio from "../Portfolio/Portfolio";
@@ -11,8 +11,6 @@ function Main() {
       <Promo />
       <AboutProject />
       <Techs />
-      <AboutMe/>
-      <Portfolio />
     </div>
   );
 }

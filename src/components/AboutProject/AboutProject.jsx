@@ -4,38 +4,34 @@ import "./AboutProject.css";
 function AboutProject() {
   return (
     <div className="about" id="about">
-      <h2 className="about__title">
-        О проекте
-      </h2>
+      <h2 className="about__title">About project</h2>
       <ul className="about__description">
         <li className="about__description-item">
           <h3 className="about__description-title">
-            Дипломный проект включал 5 этапов
+            Project contains 5 stages
           </h3>
           <p className="about__description-content">
-            Составление плана, работу над бэкендом, вёрстку, добавление
-            функциональности и финальные доработки.
+            Planning, working on the backend, layout, adding functionality and
+            final improvements.
           </p>
         </li>
         <li className="about__description-item">
-          <h3 className="about__description-title">
-            На выполнение диплома ушло 5 недель
-          </h3>
+          <h3 className="about__description-title">It took 5 weeks</h3>
           <p className="about__description-content about__description-content_last">
-            У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
-            соблюдать, чтобы успешно защититься.
+            Each stage had a soft and hard deadline that had to be met in order
+            to successfully finish the project.
           </p>
         </li>
       </ul>
       <ul className="about__duration">
         <li className="about__duration-item">
           <p className="about__duration-title about__duration-title_backend">
-            1 неделя
+            1 week
           </p>
           <p className="about__duration-subtitle">Back-end</p>
         </li>
         <li className="about__duration-item">
-          <p className="about__duration-title">4 недели</p>
+          <p className="about__duration-title">4 weeks</p>
           <p className="about__duration-subtitle">Front-end</p>
         </li>
       </ul>
