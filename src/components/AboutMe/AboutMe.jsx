@@ -15,26 +15,16 @@ function AboutMe() {
             Фронтенд-разработчик, 28 лет
           </p>
           <p className="about-me__text-description">
-            Я родилась в солнечном Оренбурге. Училась в Екатеринбурге по специальности "Инженер-эколог". С 2020 года живу в Брисбене, Австралия.
-            В июне 2022 закончила курс "Diploma of Website Development" TAFE, Queensland.
-            Заканчиваю Яндекс.Практикум по специальности Веб-разработчик.
-            Знаю React, Node, MongoDB и SQL. Хочу изучить PHP и Vue.
-            Играю на гитаре, люблю йогу и книги.
+            Я родилась в солнечном Оренбурге. Училась в Екатеринбурге по
+            специальности "Инженер-эколог". С 2020 года живу в Брисбене,
+            Австралия. В июне 2022 закончила курс "Diploma of Website
+            Development" TAFE, Queensland. Заканчиваю Яндекс.Практикум по
+            специальности Веб-разработчик. Знаю React, Node, MongoDB и SQL. Хочу
+            изучить PHP и Vue. Играю на гитаре, люблю йогу и книги.
           </p>
           <ul className="about-me__list">
             <li className="about-me__item">
-              <a
-                className="about-me__link"
-                href="https://www.facebook.com/nat.linkova"
-              >
-                Facebook
-              </a>
-            </li>
-            <li className="about-me__item">
-              <a
-                className="about-me__link"
-                href="https://github.com/NLinkova"
-              >
+              <a className="about-me__link" href="https://github.com/NLinkova">
                 Github
               </a>
             </li>
