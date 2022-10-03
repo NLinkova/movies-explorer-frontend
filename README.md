@@ -17,6 +17,3 @@ Front-end and back-end parts of the application with the following features: aut
 - Serveless architecture (Yandex.Cloud)
 
 ---
-
-- [Link](https://linkova.movie.front.nomoredomains.xyz) to the frontend;
-- Backend requests at [address](https://linkova.movie.back.nomoredomains.xyz);
