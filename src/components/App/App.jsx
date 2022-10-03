@@ -1,51 +1,58 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 import {
   Route,
   Routes,
   useNavigate,
   Navigate,
   useLocation,
-} from 'react-router-dom';
-import './App.css';
+} from "react-router-dom";
+import "./App.css";
 
-import mainApi from '../../utils/MainApi';
-import Header from '../Header/Header';
-import HeaderAuth from '../HeaderAuth/HeaderAuth';
-import Main from '../Main/Main';
-import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import Profile from '../Profile/Profile';
-import Footer from '../Footer/Footer';
-import Register from '../Register/Register';
-import Login from '../Login/Login';
-import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import TooltipContext from '../../contexts/TooltipContext';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import { CONFLICT_ERROR_CODE, UNAUTH_ERROR_CODE } from '../../constants/constants';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import mainApi from "../../utils/MainApi";
+import Header from "../Header/Header";
+import HeaderAuth from "../HeaderAuth/HeaderAuth";
+import Main from "../Main/Main";
+import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
+import Footer from "../Footer/Footer";
+import Register from "../Register/Register";
+import Login from "../Login/Login";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import TooltipContext from "../../contexts/TooltipContext";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import {
+  CONFLICT_ERROR_CODE,
+  UNAUTH_ERROR_CODE,
+} from "../../constants/constants";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [isLogin, setIsLogin] = useState(false);
-  const [textError, setTextError] = useState('');
+  const [textError, setTextError] = useState("");
   const [isEditError, setIsEditError] = useState(false);
   const [isEditDone, setIsEditDone] = useState(false);
-  const [tooltipMessage, setTooltipMessage] = useState('');
+  const [tooltipMessage, setTooltipMessage] = useState("");
   const loggedIn = localStorage.getItem("jwt") || false;
 
-  const tooltipContext = useMemo(() => ({ tooltipMessage, setTooltipMessage }), [tooltipMessage]);
+  const tooltipContext = useMemo(
+    () => ({ tooltipMessage, setTooltipMessage }),
+    [tooltipMessage]
+  );
 
   //проверка токена и установка login true
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      mainApi.getUserInfoFromServer(jwt)
+      mainApi
+        .getUserInfoFromServer(jwt)
         .then((user) => {
           if (user) {
             setIsLogin(true);
-            localStorage.setItem('userId', user._id);
+            localStorage.setItem("userId", user._id);
             setCurrentUser(user);
           }
         })
@@ -63,19 +70,19 @@ function App() {
       .register(name, email, password)
       .then((data) => {
         if (data) {
-        handleAuthLogin(email, password);
+          handleAuthLogin(email, password);
         }
       })
       .catch((err) => {
         if (err.status === CONFLICT_ERROR_CODE) {
-          setTextError('Данный email уже зарегистрирован');
+          setTextError("This email already exists");
         } else {
-          console.log(err)
-          setTextError('Нет соединения с сервером');
+          console.log(err);
+          setTextError("Server error");
         }
       })
       .finally(() => {
-        setTextError('');
+        setTextError("");
       });
   }
 
@@ -83,23 +90,24 @@ function App() {
   function handleAuthLogin(email, password) {
     mainApi
       .authorize(email, password)
-      .then(jwt => {
+      .then((jwt) => {
         if (jwt.token) {
-          localStorage.setItem('jwt', jwt.token);
+          localStorage.setItem("jwt", jwt.token);
           setIsLogin(true);
-          navigate("/movies")
-      }})
-      .catch((err) => {
-        if (err.status=== UNAUTH_ERROR_CODE) {
-          setTextError("Неправильные почта или пароль");
-        } else {
-          console.log(err)
-          setTextError('Нет соединения с сервером');
+          navigate("/movies");
         }
-        console.log(err)
+      })
+      .catch((err) => {
+        if (err.status === UNAUTH_ERROR_CODE) {
+          setTextError("Wrong email or password");
+        } else {
+          console.log(err);
+          setTextError("Server error");
+        }
+        console.log(err);
       })
       .finally(() => {
-        setTextError('')
+        setTextError("");
       });
   }
 
@@ -120,7 +128,6 @@ function App() {
       });
   }
 
-
   //выход из учетной записи и удаление токена из локального хранилища
   function handleLogout() {
     setCurrentUser({});
@@ -132,46 +139,106 @@ function App() {
   //запрос инфо при успешном токене
   useEffect(() => {
     if (isLogin) {
-      mainApi.getUserInfoFromServer()
-        .then(user => {
+      mainApi
+        .getUserInfoFromServer()
+        .then((user) => {
           setCurrentUser(user);
         })
         .catch((err) => {
           console.log(err);
-        })
+        });
     }
   }, [isLogin]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <TooltipContext.Provider value={tooltipContext}>
-          <InfoTooltip message={tooltipMessage} />
-      <div className="page">
-        <Routes>
-          <Route exact path="/" element={<>{isLogin ? <HeaderAuth/> : <Header />}
-            <Main isLogin={isLogin} />
-            <Footer /></>}>
-          </Route>
-          <Route exact path="/signin" element={loggedIn ? <Navigate to="/" />
-            : <Login authLogin={handleAuthLogin} textError={textError} setTextError={setTextError} />}>
-          </Route>
-          <Route exact path="/signup" element={loggedIn ? <Navigate to="/" />
-            : <Register authRegister={handleAuthRegister} textError={textError} setTextError={setTextError} />}>
-          </Route>
-          <Route exact path="/movies" element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth />
-            <Movies isLogin={isLogin} /><Footer /></ProtectedRoute>}>
-          </Route>
-          <Route exact path="/saved-movies" element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth />
-            <SavedMovies isLogin={isLogin}/><Footer /></ProtectedRoute>}>
-          </Route>
-          <Route exact path="/profile" element={<ProtectedRoute allowed={loggedIn} ><HeaderAuth />
-            <Profile isLogin={isLogin} handleLogout={handleLogout}
-            editProfile={editProfile} currentUser={currentUser} isEditError={isEditError} isEditDone={isEditDone}/>
-            </ProtectedRoute>}>
-          </Route>
-          <Route exact path="*" element={<NotFoundPage />}></Route>
-        </Routes>
-      </div>
+        <InfoTooltip message={tooltipMessage} />
+        <div className="page">
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <>
+                  {isLogin ? <HeaderAuth /> : <Header />}
+                  <Main isLogin={isLogin} />
+                  <Footer />
+                </>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/signin"
+              element={
+                loggedIn ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Login
+                    authLogin={handleAuthLogin}
+                    textError={textError}
+                    setTextError={setTextError}
+                  />
+                )
+              }
+            ></Route>
+            <Route
+              exact
+              path="/signup"
+              element={
+                loggedIn ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Register
+                    authRegister={handleAuthRegister}
+                    textError={textError}
+                    setTextError={setTextError}
+                  />
+                )
+              }
+            ></Route>
+            <Route
+              exact
+              path="/movies"
+              element={
+                <ProtectedRoute allowed={loggedIn}>
+                  <HeaderAuth />
+                  <Movies isLogin={isLogin} />
+                  <Footer />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/saved-movies"
+              element={
+                <ProtectedRoute allowed={loggedIn}>
+                  <HeaderAuth />
+                  <SavedMovies isLogin={isLogin} />
+                  <Footer />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/profile"
+              element={
+                <ProtectedRoute allowed={loggedIn}>
+                  <HeaderAuth />
+                  <Profile
+                    isLogin={isLogin}
+                    handleLogout={handleLogout}
+                    editProfile={editProfile}
+                    currentUser={currentUser}
+                    isEditError={isEditError}
+                    isEditDone={isEditDone}
+                  />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route exact path="*" element={<NotFoundPage />}></Route>
+          </Routes>
+        </div>
       </TooltipContext.Provider>
     </CurrentUserContext.Provider>
   );

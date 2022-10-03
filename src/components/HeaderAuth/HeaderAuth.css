@@ -172,9 +172,9 @@
     cursor: pointer;
   }
 
-  .header-auth__container_burger {
+  /* .header-auth__container_burger {
     display: none;
-  }
+  } */
 
   .header-auth__burger-account {
     display: flex;
